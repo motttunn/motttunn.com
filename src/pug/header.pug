@@ -1,0 +1,17 @@
+header.st-Header
+  button#st-Header_Button.st-Header_Button
+    | MENU
+  nav#st-Header_Nav.st-Header_Nav.st-Header_Nav-Hidden
+    ul.st-Header_Nav_List
+      li#st-Header_Nav_List_Item-Close.st-Header_Nav_List_Item.st-Header_Nav_List_Item-Close.sp_b
+        button.Item-Anchor
+          | ×
+      li.st-Header_Nav_List_Item.st-Header_Nav_List_Item-Current
+        a.Item-Anchor(href!="<?php echo home_url(); ?>/")
+          | HOME
+      li.st-Header_Nav_List_Item
+        a.Item-Anchor(href!="<?php echo home_url(); ?>/page-news.html")
+          | NEWS
+      li.st-Header_Nav_List_Item
+        a.Item-Anchor(href!="<?php echo home_url(); ?>/page-portfolio.html")
+          | PORTFOLIO

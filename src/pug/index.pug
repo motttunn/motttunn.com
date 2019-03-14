@@ -1,0 +1,129 @@
+extends include/_layout
+block meta
+  - meta = {}
+  - meta.title = ''
+  - meta.keywords = ''
+  - meta.description = ''
+  - meta.url = ''
+  - meta.img = ''
+block config
+  - config = {}
+  - config.pathTemplate = '<?php echo get_template_directory_uri(); ?>/'
+  - config.pathHome = '<?php echo home_url(); ?>/'
+  - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+block css
+  link(rel="stylesheet" href!=config.pathTemplate + "assets/css/index/style.css?hash=" + config.hash)
+block js
+  script(src!=config.pathTemplate + "assets/js/common.bundle.js?hash=" + config.hash)
+block content
+  div.st-Container
+    |
+    | <?php get_header(); ?>
+    main.idx-Main
+      div.idx-Main_Slider
+        ul.idx-Main_Slider_List
+          li.idx-Main_Slider_List_Item
+            a.Item-Anchor(href!="#" target="_blank")
+              img.Item_Thumbnail
+    section.idx-News
+      div.idx-News_Box
+        h2.sw-Title
+          span
+            | News
+        div.st-Posts.st-Posts-Index
+          ul.st-Posts_List
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+    section.idx-Portfolio
+      div.idx-Portfolio_Box
+        h2.sw-Title
+          span
+            | Portfolio
+        div.st-Works.st-Works-Index
+          ul.st-Works_List
+            li.st-Works_List_Item.st-Works_List_Item-Left
+              a.Item-Anchor(href!="#")
+                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
+                div.Item_Description
+                  div.Item_Description_Box
+                    h3.Item_Description_Box_Title
+                      | Diamond
+                    p.Item_Description_Box_Text
+                      | WebGLを使用して、ダイヤモンドを描画。
+            li.st-Works_List_Item.st-Works_List_Item-Right
+              a.Item-Anchor(href!="#")
+                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
+                div.Item_Description
+                  div.Item_Description_Box
+                    h3.Item_Description_Box_Title
+                      | Cylinder
+                    p.Item_Description_Box_Text
+                      | WebGLを使用して、円柱を描画。
+    section.idx-About
+      div.idx-About_Box
+        div.idx-About_Box_Introduction
+          h2.sw-Title
+            span
+              | Introduction
+          p.idx-About_Box_Introduction_Text
+            | web制作に関する備忘録およびポートフォリオサイトです。
+            br.pc_i
+            | 運営している人間は粉物とビールが大好きな20歳児。
+            br.pc_i
+            | 趣味は読書とゲーム(splatoon2)。
+          p.idx-About_Box_Introduction_Text
+            | 抽象的ではありますが、
+            br.pc_i
+            | もっとクリエイティブなweb制作を仕事にしたいという気持ちがあり、
+            br.pc_i
+            | 現在転職活動中です。
+        div.idx-About_Box_Links
+          h2.sw-Title
+            span
+              | Links
+          a.idx-About_Box_Links_Button(href!="#" target="_blank")
+            | GitHub
+          a.idx-About_Box_Links_Button(href!="#" target="_blank")
+            | Twitter
+    |
+    | <?php get_footer(); ?>

@@ -1,0 +1,34 @@
+extends include/_layout
+block meta
+  - meta = {}
+  - meta.title = ''
+  - meta.keywords = ''
+  - meta.description = ''
+  - meta.url = ''
+  - meta.img = ''
+block config
+  - config = {}
+  - config.path = './'
+  - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+block css
+  link(rel="stylesheet" href!=config.path + "assets/css/style.css?hash=" + config.hash)
+block js
+  script(src!=config.path + "assets/js/lib/THREE.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/WebVR.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/webvr-polyfill.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/BoxLineGeometry.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/bundle.js?hash=" + config.hash)
+block content
+  //- div.info
+    p.info_text
+      | x : 
+      span#Beta
+        | 000
+    p.info_text
+      | y : 
+      span#Gamma
+        | 000
+    p.info_text
+      | z : 
+      span#Alpha
+        | 000
