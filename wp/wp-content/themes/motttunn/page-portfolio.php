@@ -26,15 +26,15 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=1403379">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=1808687">
     <?php wp_head(); ?>
   </head>
   <body>
     <div class="st-Container">
       
       <?php get_header(); ?>
-      <section class="idx-Portfolio">
-        <div class="idx-Portfolio_Box">
+      <section class="por-Archive">
+        <div class="por-Archive_Box">
           <h2 class="sw-Title"><span>Portfolio</span></h2>
           <div class="st-Works st-Works-Index">
             <ul class="st-Works_List">
@@ -60,7 +60,7 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=1403379"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=1808687"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

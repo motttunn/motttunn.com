@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=4412051">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=1127118">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -106,7 +106,7 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=4412051"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=1127118"></script>
     <?php wp_footer(); ?>
   </body>
 </html>
