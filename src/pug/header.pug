@@ -6,12 +6,12 @@ header.st-Header
       li#st-Header_Nav_List_Item-Close.st-Header_Nav_List_Item.st-Header_Nav_List_Item-Close.sp_b
         button.Item-Anchor
           | ×
-      li.st-Header_Nav_List_Item.st-Header_Nav_List_Item-Current
+      li.st-Header_Nav_List_Item(class!="<?php if(is_home()){ echo 'st-Header_Nav_List_Item-Current'; } ?>")
         a.Item-Anchor(href!="<?php echo home_url(); ?>/")
           | HOME
-      li.st-Header_Nav_List_Item
-        a.Item-Anchor(href!="<?php echo home_url(); ?>/page-news.html")
+      li.st-Header_Nav_List_Item(class!="<?php if(is_page('news')){ echo 'st-Header_Nav_List_Item-Current'; } ?>")
+        a.Item-Anchor(href!="<?php echo home_url(); ?>/news/")
           | NEWS
-      li.st-Header_Nav_List_Item
-        a.Item-Anchor(href!="<?php echo home_url(); ?>/page-portfolio.html")
+      li.st-Header_Nav_List_Item(class!="<?php if(is_page('portfolio')){ echo 'st-Header_Nav_List_Item-Current'; } ?>")
+        a.Item-Anchor(href!="<?php echo home_url(); ?>/portfolio/")
           | PORTFOLIO

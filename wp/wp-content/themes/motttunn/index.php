@@ -8,27 +8,25 @@
       else
       { document.write('<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=2, user-scalable=yes">'); }
     </script>
-    <title></title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta property="og:url" content="">
+    <title>motttunn.com</title>
+    <meta name="description" content="web制作に関する備忘録およびポートフォリオサイトです。">
+    <meta property="og:url" content="https://motttunn.com">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:description" content="">
+    <meta property="og:title" content="motttunn.com">
+    <meta property="og:site_name" content="motttunn.com">
+    <meta property="og:description" content="web制作に関する備忘録およびポートフォリオサイトです。">
     <meta property="og:image" content="">
     <meta property="og:locale" content="ja_JP">
     <meta property="fb:app_id" content="">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="">
-    <link rel="canonical" href="">
+    <link rel="canonical" href="https://motttunn.com">
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon-180x180.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=2556381">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=4412051">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -108,7 +106,7 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=2556381"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=4412051"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

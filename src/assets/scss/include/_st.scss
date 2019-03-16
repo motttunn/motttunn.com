@@ -83,7 +83,7 @@
           transition: .4s $animation-transition;
           @include mediaQuery(min, 1024, 0){
             padding: 12px 0 12px 14px;
-            width: 120px;
+            width: 160px;
             border-radius: 4px 0 0 4px;
             font-size: 14px;
           }
@@ -96,7 +96,7 @@
           }
           &:hover {
             @include mediaQuery(min, 1024, 0){
-              transform: translateX(-24px);
+              transform: translateX(-32px);
             }
           }
         }
@@ -111,6 +111,9 @@
         @include mediaQuery(max, 0, 1023){
           margin: (24 / 768) * 100vw 0 0 0;
         }
+      }
+      &_Item:nth-child(2) {
+        margin: 0;
       }
     }
   }

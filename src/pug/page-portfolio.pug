@@ -1,10 +1,9 @@
 extends include/_layout
 block meta
   - meta = {}
-  - meta.title = ''
-  - meta.keywords = ''
-  - meta.description = ''
-  - meta.url = ''
+  - meta.title = 'Portfolio | motttunn.com'
+  - meta.description = 'web制作に関する備忘録およびポートフォリオサイトです。'
+  - meta.url = 'https://motttunn.com/portfolio/'
   - meta.img = ''
 block config
   - config = {}
@@ -12,10 +11,37 @@ block config
   - config.pathHome = '<?php echo home_url(); ?>/'
   - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
 block css
-  link(rel="stylesheet" href!=config.pathTemplate + "assets/css/style.css?hash=" + config.hash)
+  link(rel="stylesheet" href!=config.pathTemplate + "assets/css/portfolio/style.css?hash=" + config.hash)
 block js
-  script(src!=config.pathTemplate + "assets/js/bundle.js?hash=" + config.hash)
+  script(src!=config.pathTemplate + "assets/js/portfolio/app.bundle.js?hash=" + config.hash)
 block content
   div.st-Container
-    p
-      | Hi!
+    |
+    | <?php get_header(); ?>
+    section.idx-Portfolio
+      div.idx-Portfolio_Box
+        h2.sw-Title
+          span
+            | Portfolio
+        div.st-Works.st-Works-Index
+          ul.st-Works_List
+            li.st-Works_List_Item.st-Works_List_Item-Left
+              a.Item-Anchor(href!="#")
+                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
+                div.Item_Description
+                  div.Item_Description_Box
+                    h3.Item_Description_Box_Title
+                      | Diamond
+                    p.Item_Description_Box_Text
+                      | WebGLを使用して、ダイヤモンドを描画。
+            li.st-Works_List_Item.st-Works_List_Item-Right
+              a.Item-Anchor(href!="#")
+                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
+                div.Item_Description
+                  div.Item_Description_Box
+                    h3.Item_Description_Box_Title
+                      | Cylinder
+                    p.Item_Description_Box_Text
+                      | WebGLを使用して、円柱を描画。
+    |
+    | <?php get_footer(); ?>

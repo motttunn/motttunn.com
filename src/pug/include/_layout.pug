@@ -11,7 +11,6 @@ html(lang="ja")
       else
       { document.write('<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=2, user-scalable=yes">'); }
     title !{meta.title}
-    meta(name="keywords" content!=meta.keywords)
     meta(name="description" content!=meta.description)
     meta(property="og:url" content!=meta.url)
     meta(property="og:type" content="website")
@@ -27,7 +26,6 @@ html(lang="ja")
     link(rel="shortcut icon" href!=config.pathTemplate + "assets/images/common/favicon.ico" type="image/vnd.microsoft.icon")
     link(rel="icon" href!=config.pathTemplate + "assets/images/common/favicon.ico" type="image/vnd.microsoft.icon")
     link(rel="apple-touch-icon" href!=config.pathTemplate + "assets/images/common/apple-touch-icon.png")
-    link(rel="apple-touch-icon" sizes="180x180" href!=config.pathTemplate + "assets/images/common/apple-touch-icon-180x180.png")
     link(rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400")
     block css
