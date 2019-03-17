@@ -1,7 +1,7 @@
-01_cylinder
+02_diamond
 ====
 
-ピュアWebGLで円柱を描画。
+ピュアWebGLでダイアモンドを描画。
 
 ### ココ頑張りました
 
@@ -11,7 +11,8 @@
 
 ### ココまだダメです
 
-- 法線算出の不足により面の境界線が曖昧([02_diamond](https://github.com/motttunn/motttunn.com/tree/master/portfolio/02_diamond)で修正)
+- 上の面が半透明にならない(法線算出がおかしい?)
+
 
 ### 補足
 
