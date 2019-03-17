@@ -32,11 +32,12 @@ let timeStart;
 let timeNow;
 
 let m4;
-let matrixM;
-let matrixV;
-let matrixP;
-let matrixVP;
-let matrixMVP;
+let uMatrixM;
+let uMatrixV;
+let uMatrixP;
+let uMatrixVP;
+let uMatrixMVP;
+let uMatrixNormal;
 
 let cameraDistance     = 12.5;
 let cameraPosition     = [0.0, 0.0, cameraDistance];
@@ -93,8 +94,8 @@ let qty = qt4.identity(qt4.create());
     getNewLocation(program, 'a', aData, aLocation, aStride);
 
     uData = [
-      ['matrixMVP'],
-      ['matrix4fv']
+      ['uMatrixMVP', 'uMatrixNormal'],
+      ['matrix4fv', 'matrix4fv']
     ];
     getNewLocation(program, 'u', uData, uLocation);
 
@@ -106,8 +107,8 @@ let qty = qt4.identity(qt4.create());
 
     vertexPosition.push(0.0,  1.0, 0.0);
     vertexPosition.push(0.0, -1.0, 0.0);
-    vertexColor.push(1.0, 1.0, 1.0, 1.0);
-    vertexColor.push(1.0, 1.0, 1.0, 1.0);
+    vertexColor.push(0.25, 1.0, 1.0, 1.0);
+    vertexColor.push(0.25, 1.0, 1.0, 1.0);
 
     (() => {
       const SPLIT  = 16;
@@ -208,12 +209,13 @@ let qty = qt4.identity(qt4.create());
     IBO      = createNewIbo(vertexIndex);
     indexLength = vertexIndex.length;
 
-    m4        = new matIV();
-    matrixM   = m4.identity(m4.create());
-    matrixV   = m4.identity(m4.create());
-    matrixP   = m4.identity(m4.create());
-    matrixVP  = m4.identity(m4.create());
-    matrixMVP = m4.identity(m4.create());
+    m4           = new matIV();
+    uMatrixM      = m4.identity(m4.create());
+    uMatrixV      = m4.identity(m4.create());
+    uMatrixP      = m4.identity(m4.create());
+    uMatrixVP     = m4.identity(m4.create());
+    uMatrixMVP    = m4.identity(m4.create());
+    uMatrixNormal = m4.identity(m4.create());
 
     gl.enable(gl.DEPTH_TEST);
     gl.enable(gl.CULL_FACE);
@@ -241,17 +243,20 @@ let qty = qt4.identity(qt4.create());
 
     let cameraAspect = canvasWidth / canvasHeight;
     cameraUpdate();
-    m4.lookAt(cameraPosition, centerPosition, cameraUpDirection, matrixV);
-    m4.perspective(45, cameraAspect, 0.1, cameraDistance * 2.0, matrixP);
-    m4.multiply(matrixP, matrixV, matrixVP);
+    m4.lookAt(cameraPosition, centerPosition, cameraUpDirection, uMatrixV);
+    m4.perspective(45, cameraAspect, 0.1, cameraDistance * 2.0, uMatrixP);
+    m4.multiply(uMatrixP, uMatrixV, uMatrixVP);
 
     timeNow = (Date.now() - timeStart) / 1000;
-    m4.identity(matrixM);
-    // m4.translate(matrixM, [0.0, -1.0, 0.0], matrixM);
-    // m4.rotate(matrixM, timeNow * 2.0, [0.0, -1.0, -1.0], matrixM);
-    m4.multiply(matrixVP, matrixM, matrixMVP);
+    m4.identity(uMatrixM);
+    m4.rotate(uMatrixM, timeNow * 0.75, [0.0, -1.0, -1.0], uMatrixM);
+    m4.multiply(uMatrixVP, uMatrixM, uMatrixMVP);
 
-    gl.uniformMatrix4fv(uLocation[0], false, matrixMVP);
+    m4.transpose(uMatrixM, uMatrixNormal);
+    m4.inverse(uMatrixNormal, uMatrixNormal);
+
+    gl.uniformMatrix4fv(uLocation[0], false, uMatrixMVP);
+    gl.uniformMatrix4fv(uLocation[1], false, uMatrixNormal);
 
     gl.drawElements(gl.TRIANGLES, indexLength, gl.UNSIGNED_SHORT, 0);
     requestAnimationFrame(render);
