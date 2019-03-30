@@ -1,0 +1,288 @@
+// =======================================================
+// VARIABLE
+// =======================================================
+
+$color-black: #616161;
+$color-gray: #cfd8dc;
+$color-green: #81c784;
+
+
+
+// =======================================================
+// RESET
+// =======================================================
+
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+body {
+  line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+  display:block;
+}
+
+ul {
+  list-style:none;
+}
+
+blockquote, q {
+  quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content:'';
+  content:none;
+}
+
+a {
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color:#ff9;
+  color:#000;
+  text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color:#ff9;
+  color:#000;
+  font-style:italic;
+  font-weight:bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom:1px dotted;
+  cursor:help;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display:block;
+  height:1px;
+  border:0;
+  border-top:1px solid #cccccc;
+  margin:1em 0;
+  padding:0;
+}
+
+input, select {
+  vertical-align:middle;
+}
+
+input, button, textarea, select {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+
+// =======================================================
+// FOUNDATION
+// =======================================================
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $color-gray;
+    position: relative;
+}
+
+.st-Container {
+  overflow: hidden;
+}
+
+
+
+// =======================================================
+// .st-Canvas
+// =======================================================
+
+.st-Canvas {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+// =======================================================
+// .st-Form
+// =======================================================
+
+.st-Form {
+  padding: 40px 40px 40px 40px;
+  background-color: $color-gray;
+  border: 2px solid $color-black;
+  border-radius: 24px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: .4s;
+  &-Hidden {
+    opacity: 0;
+    z-index: 1;
+    transform: translate(-50%, -40%);
+    pointer-events: none;
+  }
+  &_Text {
+    margin: 0 0 16px 0;
+    color: $color-black;
+    font-size: 16px;
+    font-family: "Noto Sans JP";
+    line-height: 1;
+    text-align: center;
+    &-Mt {
+      margin: 32px 0 16px 0;
+    }
+  }
+  &_Input {
+    display: none;
+  }
+}
+
+
+
+// =======================================================
+// .sw-Button
+// =======================================================
+
+.sw-Button {
+  margin: 0 auto;
+  width: 240px;
+  display: block;
+  box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: .3s;
+  &-Green {
+    color: $color-black;
+    background-color: $color-green;
+    border: 2px solid $color-black;
+  }
+  &-Green:hover {
+    box-shadow: 0 4px 0 $color-black;
+    border: 2px solid $color-black;
+  }
+  &-Gray {
+    color: $color-black;
+    background-color: $color-gray;
+    border: 2px solid $color-black;
+  }
+  &-Gray:hover {
+    box-shadow: 0 4px 0 $color-black;
+    border: 2px solid $color-black;
+  }
+  &-Large {
+    padding: 14px 0 16px;
+    border-radius: 32px;
+    font-size: 20px;
+  }
+  &-Small {
+    padding: 10px 0 12px;
+    border-radius: 32px;
+    font-size: 16px;
+  }
+  &-Mt {
+    margin: 40px auto 0 auto;
+  }
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+
+
+// =======================================================
+// .idx-Start
+// =======================================================
+
+.idx-Start {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  transition: .4s;
+  &-Hidden {
+    opacity: 0;
+    z-index: 1;
+    transform: translate(-50%, -40%);
+    pointer-events: none;
+  }
+  &_Title {
+    color: $color-black;
+    font-size: 40px;
+    line-height: 1;
+    font-family: 'Fira Sans', sans-serif;
+    letter-spacing: 0.025em;
+  }
+  &_Subtitle {
+    margin: 16px 0 40px 0;
+    color: $color-black;
+    font-size: 16px;
+    line-height: 1;
+    font-family: "Noto Sans JP";
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+}

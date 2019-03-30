@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=1127118">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=7276749">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -45,24 +45,27 @@
           <h2 class="sw-Title"><span>News</span></h2>
           <div class="st-Posts st-Posts-Index">
             <ul class="st-Posts_List">
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
+              <?php
+                $post_args  = array('post_type' => 'post', 'posts_per_page' => 6);
+                $post_query = new WP_Query($post_args);
+                if($post_query->have_posts()):
+                while($post_query->have_posts()): $post_query->the_post();
+              ?>
+              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+                  <p class="Item_Date"><?php the_time('Y.m.d'); ?></p><img class="Item_Thumbnail">
+                  <h3 class="Item_Title">
+                    <?php
+                      if(mb_strlen(get_the_title(), 'UTF-8')>42){
+                          $post_title = mb_substr(get_the_title(), 0, 42, 'UTF-8');
+                          echo $post_title . '…';
+                      } else {
+                          echo get_the_title();
+                      }
+                    ?>
+                  </h3></a></li><?php
+                endwhile;
+                endif;
+              ?>
             </ul>
           </div>
         </div>
@@ -106,7 +109,7 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=1127118"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=7276749"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

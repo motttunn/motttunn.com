@@ -19,5 +19,5 @@
 - 行列およびクォータニオンに関しては [doxas](https://twitter.com/h_doxas) さんの  
 [minMatrixb.js](https://wgld.org/d/library/l002.html) を拝借しております。  
 
-- カメラのインタラクションに関しては [doxas](https://twitter.com/h_doxas) による  
+- カメラのインタラクションに関しては [doxas](https://twitter.com/h_doxas) さんによる  
 [WebGLスクール2018](https://webgl.souhonzan.org/entry/?v=1180) のサンプルコードを拝借しております。

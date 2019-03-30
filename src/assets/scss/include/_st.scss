@@ -42,7 +42,7 @@
     }
     &-Hidden {
       @include mediaQuery(min, 1024, 0){
-        transform: translateX(160px);
+        transform: translateX(120px);
       }
       @include mediaQuery(max, 0, 1023){
         transform: translateX((200 / 768) * 100vw);
@@ -63,7 +63,7 @@
     }
     &-Hidden {
       @include mediaQuery(min, 1024, 0){
-        transform: translateX(160px);
+        transform: translateX(140px);
       }
       @include mediaQuery(max, 0, 1023){
         transform: translateX((320 / 768) * 100vw);
@@ -96,7 +96,7 @@
           }
           &:hover {
             @include mediaQuery(min, 1024, 0){
-              transform: translateX(-32px);
+              transform: translateX(-20px);
             }
           }
         }

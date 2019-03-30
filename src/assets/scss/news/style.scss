@@ -54,3 +54,37 @@
     }
   }
 }
+
+
+
+/* =============================================================== */
+/* .new-Detail */
+/* =============================================================== */
+.new-Detail {
+  position: relative;
+  z-index: 1;
+  @include mediaQuery(min, 1024, 0){
+    padding: 120px 0 0 0;
+  }
+  @include mediaQuery(max, 0, 1023){
+    padding: (160 / 1024) * 100vw 0 0 0;
+  }
+  &_Box {
+    margin: 0 auto;
+    @include mediaQuery(min, 1024, 0){
+      width: 1000px;
+    }
+    @include mediaQuery(max, 0, 1023){
+      width: 100%;
+    }
+    &_Content {
+      margin: 32px auto 0;
+      @include mediaQuery(min, 1024, 0){
+        width: 1000px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        width: 100%;
+      }
+    }
+  }
+}

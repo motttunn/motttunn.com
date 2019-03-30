@@ -31,48 +31,72 @@ block content
             | News
         div.st-Posts.st-Posts-Index
           ul.st-Posts_List
+            | <?php
+            |   $post_args  = array('post_type' => 'post', 'posts_per_page' => 6);
+            |   $post_query = new WP_Query($post_args);
+            |   if($post_query->have_posts()):
+            |   while($post_query->have_posts()): $post_query->the_post();
+            | ?>
             li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
+              a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 p.Item_Date
-                  | 2019.00.00
+                  | <?php the_time('Y.m.d'); ?>
                 img.Item_Thumbnail
                 h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+                  | <?php
+                  |   if(mb_strlen(get_the_title(), 'UTF-8')>42){
+                  |       $post_title = mb_substr(get_the_title(), 0, 42, 'UTF-8');
+                  |       echo $post_title . '…';
+                  |   } else {
+                  |       echo get_the_title();
+                  |   }
+                  | ?>
+            | <?php
+            |   endwhile;
+            |   endif;
+            | ?>
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            //- li.st-Posts_List_Item
+            //-   a.Item-Anchor(href!="#")
+            //-     p.Item_Date
+            //-       | 2019.00.00
+            //-     img.Item_Thumbnail
+            //-     h3.Item_Title
+            //-       | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
     section.idx-Portfolio
       div.idx-Portfolio_Box
         h2.sw-Title

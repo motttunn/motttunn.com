@@ -1,0 +1,70 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="utf-8")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300")
+    link(rel="stylesheet" href="./assets/css/style.css")
+  body
+    div.st-Container
+      div#js-Start.idx-Start
+        h1.idx-Start_Title
+          | Obj File Viewer
+        h2.idx-Start_Subtitle
+          | objファイルをブラウザ上で確認できるツールです
+        button#js-Start_Button.sw-Button.sw-Button-Green.sw-Button-Large
+          | start
+      form#js-Form.st-Form.st-Form-Hidden(name='configForm')
+        p.st-Form_Text
+          | objファイルを選択してください
+        label.sw-Button.sw-Button-Gray.sw-Button-Small(for='objFormInput')
+          | select obj file
+          input#objFormInput.st-Form_Input(type='file' name='objFormInput' accept='.obj')
+        p.st-Form_Text.st-Form_Text-Mt
+          | テクスチャ画像を選択してください
+        label.sw-Button.sw-Button-Gray.sw-Button-Small(for='imgFormInput')
+          | select texture file
+          input#imgFormInput.st-Form_Input(type='file' name='imgFormInput' accept='image/*')
+        div#js-Form_Button.sw-Button.sw-Button-Green.sw-Button-Large.sw-Button-Mt
+          | rendering
+    canvas#screen.st-Canvas
+    script#main_vs(type='x-shader/x-vertex').
+      attribute vec3 position;
+      attribute vec3 normal;
+      attribute vec2 texCoord;
+      uniform mat4 mMatrix;
+      uniform mat4 mvpMatrix;
+      uniform mat4 invMatrix;
+      uniform mat4 norMatrix;
+      uniform vec3 skyDirection;
+      uniform vec3 lightDirection;
+      uniform vec3 eyePosition;
+      uniform vec4 skyColor;
+      uniform vec4 groundColor;
+      varying vec4 vColor;
+      varying vec2 vTexCoord;
+      void main(void) {
+        vec3 invSky      = normalize(invMatrix * vec4(skyDirection, 0.25)).xyz;
+        vec3 invLight    = normalize(invMatrix * vec4(lightDirection, 0.25)).xyz;
+        vec3 invEye      = normalize(invMatrix * vec4(eyePosition, 0.25)).xyz;
+        vec3 halfLE      = normalize(invLight + invEye);
+        vec3 nor         = (norMatrix * vec4(normal, 0.0)).xyz;
+        float diffuse    = clamp(dot(nor, invLight), 0.0, 1.0) * 1.0;
+        float specular   = pow(clamp(dot(normal, halfLE), 0.0, 1.0), 100.0);
+        float hemisphere = (dot(normal, invSky) + 1.0) * 0.5;
+        vec4 ambient     = mix(groundColor, skyColor, hemisphere);
+        vColor           = vec4(vec3(diffuse), 1.0) + hemisphere;
+        vTexCoord        = texCoord;
+        gl_Position      = mvpMatrix * vec4(position, 1.0);
+      }
+    script#main_fs(type='x-shader/x-fragment').
+      precision mediump float;
+      uniform sampler2D textureUnit;
+      varying vec4 vColor;
+      varying vec2 vTexCoord;
+      void main() {
+        vec4 samplerColor = texture2D(textureUnit, vTexCoord);
+        gl_FragColor = vColor * samplerColor;
+      }
+    script(src="./assets/js/lib.min.js")
+    script(src="./assets/js/script.js")

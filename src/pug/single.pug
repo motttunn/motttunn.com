@@ -1,0 +1,89 @@
+extends include/_layout
+block meta
+  | <?php
+  |   if(have_posts()):
+  |   while(have_posts()): the_post();
+  |   $post_meta_desc      = esc_html(get_the_excerpt());
+  |   $post_meta_thumb_id  = get_post_thumbnail_id();
+  |   $post_meta_thumb_url = wp_get_attachment_image_src($post_meta_thumb_id, true);
+  |   $post_meta_thumb_url = esc_url($post_meta_thumb_url[0]);
+  |   endwhile;
+  |   endif;
+  | ?>
+  |
+  - meta = {}
+  - meta.title = '<?php the_title(); ?> | News | motttunn.com'
+  - meta.description = '<?php echo $post_meta_desc; ?>'
+  - meta.url = 'https://motttunn.com/news/'
+  - meta.img = ''
+block config
+  - config = {}
+  - config.pathTemplate = '<?php echo get_template_directory_uri(); ?>/'
+  - config.pathHome = '<?php echo home_url(); ?>/'
+  - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+block css
+  link(rel="stylesheet" href!=config.pathTemplate + "assets/css/news/style.css?hash=" + config.hash)
+block js
+  script(src!=config.pathTemplate + "assets/js/news/app.bundle.js?hash=" + config.hash)
+block content
+  div.st-Container
+    |
+    | <?php get_header(); ?>
+    section.new-Detail
+      div.new-Detail_Box
+        h2.sw-Title
+          span
+            | News
+        div.new-Detail_Box_Content
+          h3.content_Title
+            | <?php the_title(); ?>
+          p.content_Date
+            | <?php the_time('Y.m.d.'); ?>
+          div.content_Text
+            | <?php the_content(); ?>
+        //- div.st-Posts.st-Posts-Index
+          ul.st-Posts_List
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+            li.st-Posts_List_Item
+              a.Item-Anchor(href!="#")
+                p.Item_Date
+                  | 2019.00.00
+                img.Item_Thumbnail
+                h3.Item_Title
+                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+    |
+    | <?php get_footer(); ?>
