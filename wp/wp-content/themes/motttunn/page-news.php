@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=5821595">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=7997494">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -36,33 +36,44 @@
       <section class="new-Archive">
         <div class="new-Archive_Box">
           <h2 class="sw-Title"><span>News</span></h2>
-          <div class="st-Posts st-Posts-Index">
+          <div class="st-Posts st-Posts-News">
             <ul class="st-Posts_List">
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
-              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="#">
-                  <p class="Item_Date">2019.00.00</p><img class="Item_Thumbnail">
-                  <h3 class="Item_Title">テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4</h3></a></li>
+              <?php
+                $post_paged = get_query_var('paged', 1);
+                $post_args  = array('paged' => $post_paged, 'post_type' => 'post', 'posts_per_page' => 12);
+                $post_query = new WP_Query($post_args);
+                if($post_query->have_posts()):
+                while($post_query->have_posts()): $post_query->the_post();
+              ?>
+              <li class="st-Posts_List_Item"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+                  <p class="Item_Date"><?php the_time('Y.m.d'); ?></p>
+                  <figure class="Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
+                  <h3 class="Item_Title">
+                    <?php
+                      if(mb_strlen(get_the_title(), 'UTF-8')>42){
+                          $post_title = mb_substr(get_the_title(), 0, 42, 'UTF-8');
+                          echo $post_title . '…';
+                      } else {
+                          echo get_the_title();
+                      }
+                    ?>
+                  </h3></a></li><?php
+                endwhile;
+                endif;
+              ?>
             </ul>
+          </div>
+          <div class="st-Pagenation">
+            <?php
+              wp_pagenavi(array('query' => $post_query));
+            ?>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=5821595"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=7997494"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=7997494"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

@@ -26,7 +26,8 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=7276749">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/lib.min.css?hash=5571114">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=5571114">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -35,8 +36,42 @@
       <?php get_header(); ?>
       <main class="idx-Main">
         <div class="idx-Main_Slider">
-          <ul class="idx-Main_Slider_List">
-            <li class="idx-Main_Slider_List_Item"><a class="Item-Anchor" href="#" target="_blank"><img class="Item_Thumbnail"></a></li>
+          <ul class="idx-Main_Slider_List" id="idx-Main_Slider_List">
+            <?php
+              $main_args  = array('post_type' => array('post', 'portfolio'), 'posts_per_page' => 4);
+              $main_query = new WP_Query($main_args);
+              if($main_query->have_posts()):
+              while($main_query->have_posts()): $main_query->the_post();
+              $main_item_type = get_post_type();
+            ?>
+            <li class="idx-Main_Slider_List_Item"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+                <figure class="Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
+                <div class="Item_Info">
+                  <p class="Item_Info_Description">
+                    <?php the_time('Y.m.d'); ?>
+                     / 
+                    <?php 
+                      if($main_item_type == 'post'):
+                      echo 'News';
+                      elseif ($main_item_type == 'portfolio'):
+                      echo 'Portfolio';
+                      endif;
+                    ?>
+                  </p>
+                  <p class="Item_Info_Title">
+                    <?php
+                      if(mb_strlen(get_the_title(), 'UTF-8')>42){
+                          $main_title = mb_substr(get_the_title(), 0, 42, 'UTF-8');
+                          echo $main_title . '…';
+                      } else {
+                          echo get_the_title();
+                      }
+                    ?>
+                  </p>
+                </div></a></li><?php
+              endwhile;
+              endif;
+            ?>
           </ul>
         </div>
       </main>
@@ -52,7 +87,8 @@
                 while($post_query->have_posts()): $post_query->the_post();
               ?>
               <li class="st-Posts_List_Item"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
-                  <p class="Item_Date"><?php the_time('Y.m.d'); ?></p><img class="Item_Thumbnail">
+                  <p class="Item_Date"><?php the_time('Y.m.d'); ?></p>
+                  <figure class="Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <h3 class="Item_Title">
                     <?php
                       if(mb_strlen(get_the_title(), 'UTF-8')>42){
@@ -75,22 +111,41 @@
           <h2 class="sw-Title"><span>Portfolio</span></h2>
           <div class="st-Works st-Works-Index">
             <ul class="st-Works_List">
-              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="#">
-                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"></figure>
+              <?php
+                $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 4);
+                $work_query = new WP_Query($work_args);
+                if($work_query->have_posts()):
+                while($work_query->have_posts()): $work_query->the_post();
+              ?>
+              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <div class="Item_Description">
                     <div class="Item_Description_Box">
-                      <h3 class="Item_Description_Box_Title">Diamond</h3>
-                      <p class="Item_Description_Box_Text">WebGLを使用して、ダイヤモンドを描画。</p>
+                      <h3 class="Item_Description_Box_Title">
+                        <?php
+                          if(mb_strlen(get_the_title(), 'UTF-8')>24){
+                              $work_title = mb_substr(get_the_title(), 0, 24, 'UTF-8');
+                              echo $work_title . '…';
+                          } else {
+                              echo get_the_title();
+                          }
+                        ?>
+                      </h3>
+                      <p class="Item_Description_Box_Text">
+                        <?php
+                          if(mb_strlen(get_the_content(), 'UTF-8')>72){
+                              $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
+                              echo $work_content . '…';
+                          } else {
+                              echo get_the_content();
+                          }
+                        ?>
+                      </p>
                     </div>
-                  </div></a></li>
-              <li class="st-Works_List_Item st-Works_List_Item-Right"><a class="Item-Anchor" href="#">
-                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"></figure>
-                  <div class="Item_Description">
-                    <div class="Item_Description_Box">
-                      <h3 class="Item_Description_Box_Title">Cylinder</h3>
-                      <p class="Item_Description_Box_Text">WebGLを使用して、円柱を描画。</p>
-                    </div>
-                  </div></a></li>
+                  </div></a></li><?php
+                endwhile;
+                endif;
+              ?>
             </ul>
           </div>
         </div>
@@ -109,7 +164,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/common.bundle.js?hash=7276749"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/lib.min.js?hash=5571114"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/app.bundle.js?hash=5571114"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

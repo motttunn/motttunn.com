@@ -58,6 +58,7 @@ gulp.task('sass', () => {
     .pipe(sass({pretty: true}))
     .pipe(sassPleeease({
       minifier: true,
+      mqpacker: true,
       autoprefixer: {
         browsers: ['last 6 versions']
       }

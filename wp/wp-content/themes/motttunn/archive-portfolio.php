@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=8258224">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=3236118">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -36,31 +36,57 @@
       <section class="por-Archive">
         <div class="por-Archive_Box">
           <h2 class="sw-Title"><span>Portfolio</span></h2>
-          <div class="st-Works st-Works-Index">
+          <div class="st-Works st-Works-News">
             <ul class="st-Works_List">
-              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="#">
-                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"></figure>
+              <?php
+                $work_paged = get_query_var('paged', 1);
+                $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 8);
+                $work_query = new WP_Query($work_args);
+                if($work_query->have_posts()):
+                while($work_query->have_posts()): $work_query->the_post();
+              ?>
+              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <div class="Item_Description">
                     <div class="Item_Description_Box">
-                      <h3 class="Item_Description_Box_Title">Diamond</h3>
-                      <p class="Item_Description_Box_Text">WebGLを使用して、ダイヤモンドを描画。</p>
+                      <h3 class="Item_Description_Box_Title">
+                        <?php
+                          if(mb_strlen(get_the_title(), 'UTF-8')>24){
+                              $work_title = mb_substr(get_the_title(), 0, 24, 'UTF-8');
+                              echo $work_title . '…';
+                          } else {
+                              echo get_the_title();
+                          }
+                        ?>
+                      </h3>
+                      <p class="Item_Description_Box_Text">
+                        <?php
+                          if(mb_strlen(get_the_content(), 'UTF-8')>72){
+                              $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
+                              echo $work_content . '…';
+                          } else {
+                              echo get_the_content();
+                          }
+                        ?>
+                      </p>
                     </div>
-                  </div></a></li>
-              <li class="st-Works_List_Item st-Works_List_Item-Right"><a class="Item-Anchor" href="#">
-                  <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"></figure>
-                  <div class="Item_Description">
-                    <div class="Item_Description_Box">
-                      <h3 class="Item_Description_Box_Title">Cylinder</h3>
-                      <p class="Item_Description_Box_Text">WebGLを使用して、円柱を描画。</p>
-                    </div>
-                  </div></a></li>
+                  </div></a></li><?php
+                endwhile;
+                endif;
+              ?>
             </ul>
+          </div>
+          <div class="st-Pagenation">
+            <?php
+              wp_pagenavi(array('query' => $work_query));
+            ?>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=8258224"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=3236118"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=3236118"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

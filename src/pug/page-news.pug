@@ -13,6 +13,7 @@ block config
 block css
   link(rel="stylesheet" href!=config.pathTemplate + "assets/css/news/style.css?hash=" + config.hash)
 block js
+  script(src!=config.pathTemplate + "assets/js/lib.min.js?hash=" + config.hash)
   script(src!=config.pathTemplate + "assets/js/news/app.bundle.js?hash=" + config.hash)
 block content
   div.st-Container
@@ -23,49 +24,37 @@ block content
         h2.sw-Title
           span
             | News
-        div.st-Posts.st-Posts-Index
+        div.st-Posts.st-Posts-News
           ul.st-Posts_List
+            | <?php
+            |   $post_paged = get_query_var('paged', 1);
+            |   $post_args  = array('paged' => $post_paged, 'post_type' => 'post', 'posts_per_page' => 12);
+            |   $post_query = new WP_Query($post_args);
+            |   if($post_query->have_posts()):
+            |   while($post_query->have_posts()): $post_query->the_post();
+            | ?>
             li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
+              a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
+                  | <?php the_time('Y.m.d'); ?>
+                figure.Item_Thumbnail
+                  | <?php the_post_thumbnail(); ?>
                 h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+                  | <?php
+                  |   if(mb_strlen(get_the_title(), 'UTF-8')>42){
+                  |       $post_title = mb_substr(get_the_title(), 0, 42, 'UTF-8');
+                  |       echo $post_title . '…';
+                  |   } else {
+                  |       echo get_the_title();
+                  |   }
+                  | ?>
+            | <?php
+            |   endwhile;
+            |   endif;
+            | ?>
+        div.st-Pagenation
+          | <?php
+          |   wp_pagenavi(array('query' => $post_query));
+          | ?>
     |
     | <?php get_footer(); ?>

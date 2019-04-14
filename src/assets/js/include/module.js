@@ -2,7 +2,20 @@ const breakPoint = 1023;
 let resizeFlag   = false;
 let windowWidth  = window.innerWidth;
 let windowHeight = window.innerHeight;
-// let windowWidthJ = $(window).width();
+let windowWidthJ = $(window).width();
+
+
+
+// ------------------------------------------------------------------------
+// openPage
+// ----- BOTH
+// ------------------------------------------------------------------------
+const openPage = () => {
+  let loading = document.getElementById('idx-Loading');
+  window.addEventListener('load', () => {
+    loading.classList.add('idx-Loading-Hidden');
+  }, false);
+};
 
 
 
@@ -51,7 +64,7 @@ const toggleHeader = () => {
 const parallaxThumbnail = () => {
   let scrollVolume   = 0;
   let worksThumbnail = document.getElementsByClassName('st-Works_List_Item_Thumbnail');
-  if (windowWidth > breakPoint ){
+  if (windowWidth > breakPoint) {
     window.addEventListener('scroll', () => {
       scrollVolume = window.pageYOffset;
       for (let i = 0; i < worksThumbnail.length; i++) {
@@ -60,11 +73,58 @@ const parallaxThumbnail = () => {
         let worksThumbnailHeight     = worksThumbnail[i].clientHeight;
         let worksThumbnailDifference = scrollVolume - worksThumbnailTop - (worksThumbnailHeight * 1.5);
         if(worksThumbnailDifference > 0){
-          worksThumbnail[i].style.transform = 'translateY(calc(-50% - ' + worksThumbnailDifference / 20 + 'px))';
+          worksThumbnail[i].style.transform = 'translateY(calc(-50% - ' + worksThumbnailDifference / 25 + 'px))';
         };
       }
     }, false);
   }
+};
+
+
+
+// ------------------------------------------------------------------------
+// slickMain
+// ----- BOTH
+// ------------------------------------------------------------------------
+const slickMain = () => {
+  var slickWidth   = 0;
+  var slickPadding = 0;
+  $(window).on('load', function(){
+    if(windowWidthJ > breakPoint){
+      slickWidth   = 800;
+      slickPadding = (windowWidthJ - 800) / 2;
+    } else {
+
+    }
+    $('#idx-Main_Slider_List').slick({
+      speed: 600,
+      centerMode: true,
+      centerPadding: slickPadding + "px",
+      arrows: false,
+      dots: true
+      // responsive: [
+      // {
+      //   breakpoint: 768,
+      //   settings: {
+      //     arrows: false,
+      //     centerMode: true,
+      //     centerPadding: '40px',
+      //     slidesToShow: 3
+      //   }
+      // },
+      // ]
+    });
+  });
+  $(window).on('resize', function(){
+    var resizeWidthJ = $(window).width();
+    if(resizeWidthJ > breakPoint){
+      slickWidth   = 800;
+      slickPadding = (resizeWidthJ - 800) / 2;
+    } else {
+
+    }
+    $('#idx-Main_Slider_List')[0].slick.options.centerPadding = slickPadding + "px";
+  });
 };
 
 
@@ -93,7 +153,9 @@ const anchorLink = () => {
 
 
 export {
+  openPage,
   toggleHeader,
   parallaxThumbnail,
+  slickMain,
   anchorLink
 }

@@ -37,26 +37,28 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=1410801">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=4967131">
     <?php wp_head(); ?>
   </head>
   <body>
     <div class="st-Container">
       
       <?php get_header(); ?>
-      <section class="new-Detail">
-        <div class="new-Detail_Box">
+      <section class="st-Detail">
+        <div class="st-Detail_Box">
           <h2 class="sw-Title"><span>News</span></h2>
-          <div class="new-Detail_Box_Content">
-            <h3 class="content_Title"><?php the_title(); ?></h3>
-            <p class="content_Date"><?php the_time('Y.m.d.'); ?></p>
-            <div class="content_Text"><?php the_content(); ?></div>
+          <div class="st-Detail_Box_Content">
+            <h3 class="Content_Title"><?php the_title(); ?></h3>
+            <p class="Content_Date"><?php the_time('Y.m.d.'); ?></p>
+            <figure class="Content_Thumbnail"><?php the_post_thumbnail(); ?></figure>
+            <div class="Content_Text"><?php the_content(); ?></div>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=1410801"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=4967131"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=4967131"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

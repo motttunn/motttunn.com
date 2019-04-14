@@ -24,22 +24,25 @@ block config
 block css
   link(rel="stylesheet" href!=config.pathTemplate + "assets/css/news/style.css?hash=" + config.hash)
 block js
+  script(src!=config.pathTemplate + "assets/js/lib.min.js?hash=" + config.hash)
   script(src!=config.pathTemplate + "assets/js/news/app.bundle.js?hash=" + config.hash)
 block content
   div.st-Container
     |
     | <?php get_header(); ?>
-    section.new-Detail
-      div.new-Detail_Box
+    section.st-Detail
+      div.st-Detail_Box
         h2.sw-Title
           span
             | News
-        div.new-Detail_Box_Content
-          h3.content_Title
+        div.st-Detail_Box_Content
+          h3.Content_Title
             | <?php the_title(); ?>
-          p.content_Date
+          p.Content_Date
             | <?php the_time('Y.m.d.'); ?>
-          div.content_Text
+          figure.Content_Thumbnail
+            | <?php the_post_thumbnail(); ?>
+          div.Content_Text
             | <?php the_content(); ?>
         //- div.st-Posts.st-Posts-Index
           ul.st-Posts_List

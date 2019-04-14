@@ -37,26 +37,61 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=8566256">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=3481851">
     <?php wp_head(); ?>
   </head>
   <body>
     <div class="st-Container">
       
       <?php get_header(); ?>
-      <section class="por-Detail">
-        <div class="por-Detail_Box">
+      <section class="st-Detail">
+        <div class="st-Detail_Box">
           <h2 class="sw-Title"><span>Portfolio</span></h2>
-          <div class="por-Detail_Box_Content">
-            <h3 class="content_Title"><?php the_title(); ?></h3>
-            <p class="content_Date"><?php the_time('Y.m.d.'); ?></p>
-            <div class="content_Text"><?php the_content(); ?></div>
+          <div class="st-Detail_Box_Content">
+            <h3 class="Content_Title"><?php the_title(); ?></h3>
+            <p class="Content_Date"><?php the_field('portfolio_date'); ?></p>
+            <figure class="Content_Thumbnail"><?php the_post_thumbnail(); ?></figure>
+            <div class="Content_Link">
+              <ul class="Content_Link_List">
+                <li class="Content_Link_List_Item Content_Link_List_Item-Page"><a class="Item_Button" href="<?php the_field('portfolio_url_page'); ?>" target="_blank">Page</a></li>
+                <li class="Content_Link_List_Item Content_Link_List_Item-Github"><a class="Item_Button" href="<?php the_field('portfolio_url_github'); ?>" target="_blank">Github</a></li>
+              </ul>
+            </div>
+            <div class="Content_Text"><?php the_content(); ?>
+              <h4>頑張ったポイント</h4>
+              <ul class="Content_Text_List">
+                <?php
+                  $good_text  = get_field('portfolio_point_good');
+                  $good_array = explode("\n", $good_text);
+                  $good_array = array_map('trim', $good_array);
+                  $good_array = array_filter($good_array, 'strlen');
+                  $good_array = array_values($good_array);
+                  foreach($good_array as $good_item):
+                  echo '<li class="Content_Text_List_Item"><p>・' . $good_item . '</p></li>';
+                  endforeach;
+                ?>
+              </ul>
+              <h4>改善が必要なポイント</h4>
+              <ul class="Content_Text_List">
+                <?php
+                  $bad_text  = get_field('portfolio_point_bad');
+                  $bad_array = explode("\n", $bad_text);
+                  $bad_array = array_map('trim', $bad_array);
+                  $bad_array = array_filter($bad_array, 'strlen');
+                  $bad_array = array_values($bad_array);
+                  foreach($bad_array as $bad_item):
+                  echo '<li class="Content_Text_List_Item"><p>・' . $bad_item . '</p></li>';
+                  endforeach;
+                ?>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=8566256"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=3481851"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=3481851"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

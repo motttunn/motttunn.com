@@ -103,6 +103,9 @@
         &-Current .Item-Anchor {
           background-color: darken($color-blue, 8%);
         }
+        &-Close .Item-Anchor {
+          background-color: $color-gray;
+        }
       }
       &_Item + &_Item {
         @include mediaQuery(min, 1024, 0){
@@ -113,7 +116,9 @@
         }
       }
       &_Item:nth-child(2) {
-        margin: 0;
+        @include mediaQuery(min, 1024, 0){
+          margin: 0;
+        }
       }
     }
   }
@@ -172,37 +177,21 @@
     width: 1000px;
   }
   @include mediaQuery(max, 0, 1023){
+    margin: (64 / 768) * 100vw 0 0 0;
     width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
   }
   &-Index {
     @include mediaQuery(max, 0, 1023){
-      margin: (64 / 768) * 100vw 0 0 0;
+      overflow-y: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
-  }
-  &_List {
-    font-size: 0;
-    @include mediaQuery(min, 1024, 0){
-      margin: 36px -44px 0 0;
-    }
-    @include mediaQuery(max, 0, 1023){
-      width: 100%;
-    }
-    &_Item {
-      display: inline-block;
-      vertical-align: top;
-      @include mediaQuery(min, 1024, 0){
-        margin: 44px 44px 0 0;
-        width: 304px;
-        font-size: 12px;
-      }
+    .st-Posts_List_Item {
       @include mediaQuery(max, 0, 1023){
         margin: 0 0 0 (24 / 768) * 100vw;
-        width: (672 / 768) * 100vw;
-        font-size: (28 / 768) * 100vw;
+        display: inline-block;
+        vertical-align: top;
       }
       &:first-child {
         @include mediaQuery(max, 0, 1023){
@@ -214,15 +203,64 @@
           margin: 0 (48 / 768) * 100vw 0 (24 / 768) * 100vw;
         }
       }
-      &:nth-child(3n) {
+    }
+  }
+  &-News {
+    .st-Posts_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: 0 auto;
+      }
+    }
+    .st-Posts_List_Item + .st-Posts_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: (32 / 768) * 100vw auto 0;
+      }
+    }
+  }
+  &_List {
+    font-size: 0;
+    @include mediaQuery(min, 1024, 0){
+      margin: 36px 0 0 0;
+    }
+    @include mediaQuery(max, 0, 1023){
+      width: 100%;
+    }
+    &_Item {
+      @include mediaQuery(min, 1024, 0){
+        margin: 44px 0 0 0;
+        width: 304px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 12px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        width: (672 / 768) * 100vw;
+        font-size: (28 / 768) * 100vw;
+      }
+      &:nth-child(3n+2), &:nth-child(3n+3) {
         @include mediaQuery(min, 1024, 0){
-          margin: 44px 0 0 0;
+          margin: 44px 0 0 44px;
         }
       }
       .Item-Anchor {
         display: block;
         text-decoration: none;
         position: relative;
+        &:hover .Item_Thumbnail::before {
+          @include mediaQuery(min, 1024, 0){
+            border: 4px solid $color-gray;
+          }
+        }
+        &:hover .Item_Thumbnail img {
+          @include mediaQuery(min, 1024, 0){
+            transform: scale(1.125);
+          }
+        }
+        &:hover .Item_Title {
+          @include mediaQuery(min, 1024, 0){
+            text-decoration: underline;
+          }
+        }
       }
       .Item_Date {
         display: inline-block;
@@ -248,6 +286,8 @@
       }
       .Item_Thumbnail {
         background-color: $color-gray;
+        overflow: hidden;
+        position: relative;
         @include mediaQuery(min, 1024, 0){
           width: 304px;
           height: 171px;
@@ -257,6 +297,33 @@
           width: 100%;
           height: (378 / 768) * 100vw;
           border-radius: (8 / 768) * 100vw;
+        }
+        &::before {
+          @include mediaQuery(min, 1024, 0){
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: 2px solid $color-gray;
+            border-radius: 4px;
+            transition: .4s $animation-transition;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+          }
+        }
+        img {
+          position: relative;
+          z-index: 1;
+          @include mediaQuery(min, 1024, 0){
+            border-radius: 4px;
+            transition: .4s $animation-transition;
+          }
+          @include mediaQuery(max, 0, 1023){
+            border-radius: (8 / 768) * 100vw;
+          }
         }
       }
       .Item_Title {
@@ -287,36 +354,25 @@
   margin: 0 auto;
   width: 1000px;
   @include mediaQuery(min, 1024, 0){
+    margin: 80px 0 0 0;
     width: 1000px;
   }
   @include mediaQuery(max, 0, 1023){
+    margin: (64 / 768) * 100vw 0 0 0;
     width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
   }
   &-Index {
-    @include mediaQuery(min, 1024, 0){
-      margin: 80px 0 0 0;
-    }
     @include mediaQuery(max, 0, 1023){
-      margin: (64 / 768) * 100vw 0 0 0;
+      overflow-y: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
-  }
-  &_List {
-    @include mediaQuery(min, 1024, 0){
-    }
-    @include mediaQuery(max, 0, 1023){
-      font-size: 0;
-    }
-    &_Item {
+    .st-Works_List_Item {
       @include mediaQuery(max, 0, 1023){
         margin: 0 0 0 (24 / 768) * 100vw;
         display: inline-block;
         vertical-align: top;
-        width: (672 / 768) * 100vw;
-        font-size: (28 / 768) * 100vw;
       }
       &:first-child {
         @include mediaQuery(max, 0, 1023){
@@ -327,6 +383,32 @@
         @include mediaQuery(max, 0, 1023){
           margin: 0 (48 / 768) * 100vw 0 (24 / 768) * 100vw;
         }
+      }
+    }
+  }
+  &-News {
+    .st-Works_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: 0 auto;
+
+      }
+    }
+    .st-Works_List_Item + .st-Works_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: (80 / 768) * 100vw auto 0;
+      }
+    }
+  }
+  &_List {
+    @include mediaQuery(min, 1024, 0){
+    }
+    @include mediaQuery(max, 0, 1023){
+      font-size: 0;
+    }
+    &_Item {
+      @include mediaQuery(max, 0, 1023){
+        width: (672 / 768) * 100vw;
+        font-size: (28 / 768) * 100vw;
       }
       .Item-Anchor {
         display: block;
@@ -339,10 +421,26 @@
           width: (672 / 768) * 100vw;
           // height: (600 / 768) * 100vw;
         }
+        &:hover .Item_Thumbnail::before {
+          @include mediaQuery(min, 1024, 0){
+            border: 4px solid $color-gray;
+          }
+        }
+        &:hover .Item_Thumbnail img {
+          @include mediaQuery(min, 1024, 0){
+            transform: scale(1.125);
+          }
+        }
+        &:hover .Item_Description_Box_Text {
+          @include mediaQuery(min, 1024, 0){
+            text-decoration: underline;
+          }
+        }
       }
       .Item_Thumbnail {
         display: block;
         background-color: $color-gray;
+        overflow: hidden;
         z-index: 2;
         @include mediaQuery(min, 1024, 0){
           width: 480px;
@@ -358,6 +456,33 @@
           height: (324 / 768) * 100vw;
           border-radius: (8 / 768) * 100vw;
           position: relative;
+        }
+        &::before {
+          @include mediaQuery(min, 1024, 0){
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: 2px solid $color-gray;
+            border-radius: 4px;
+            transition: .4s $animation-transition;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+          }
+        }
+        img {
+          position: relative;
+          z-index: 1;
+          @include mediaQuery(min, 1024, 0){
+            border-radius: 4px;
+            transition: .4s $animation-transition;
+          }
+          @include mediaQuery(max, 0, 1023){
+            border-radius: (8 / 768) * 100vw;
+          }
         }
       }
       .Item_Description {
@@ -380,6 +505,7 @@
         }
         &_Box {
           @include mediaQuery(min, 1024, 0){
+            width: 440px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -401,6 +527,7 @@
           &_Text {
             color: $color-gray;
             letter-spacing: 0.05em;
+            line-height: 1.6;
             @include mediaQuery(min, 1024, 0){
               font-size: 12px;
             }
@@ -440,6 +567,311 @@
       & + & {
         @include mediaQuery(min, 1024, 0){
           margin: 120px 0 0 0;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* =============================================================== */
+/* .st-Detail */
+/* =============================================================== */
+.st-Detail {
+  position: relative;
+  z-index: 1;
+  @include mediaQuery(min, 1024, 0){
+    padding: 120px 0 0 0;
+  }
+  @include mediaQuery(max, 0, 1023){
+    padding: (160 / 1024) * 100vw 0 0 0;
+  }
+  &_Box {
+    margin: 0 auto;
+    @include mediaQuery(min, 1024, 0){
+      width: 1000px;
+    }
+    @include mediaQuery(max, 0, 1023){
+      width: 100%;
+    }
+    &_Content {
+      color: $color-gray;
+      @include mediaQuery(min, 1024, 0){
+        margin: 40px auto 0;
+        width: 800px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        margin: (64 / 768) * 100vw auto 0;
+        width: (672 / 768) * 100vw;
+      }
+      .Content_Title {
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        @include mediaQuery(min, 1024, 0){
+          @include font-size(20);
+        }
+        @include mediaQuery(max, 0, 1023){
+          font-size: (36 / 768) * 100vw;
+        }
+      }
+      .Content_Date {
+        @include font-family-en;
+        letter-spacing: 0.0625em;
+        @include mediaQuery(min, 1024, 0){
+          margin: 16px 0 0 0;
+          font-size: 12px;
+        }
+        @include mediaQuery(max, 0, 1023){
+          margin: 3.125vw 0 0 0;
+          font-size: (28 / 768) * 100vw;
+        }
+      }
+      .Content_Thumbnail {
+        overflow: hidden;
+        @include mediaQuery(min, 1024, 0){
+          margin: 28px 0 0 0;
+          border-radius: 4px;
+        }
+        @include mediaQuery(max, 0, 1023){
+          margin: 4.6875vw 0 0 0;
+          border-radius: (8 / 768) * 100vw;
+        }
+      }
+      .Content_Link {
+        @include mediaQuery(min, 1024, 0){
+          margin: 32px 0 0 0;
+        }
+        @include mediaQuery(max, 0, 1023){
+          margin: (64 / 768) * 100vw auto 0;
+        }
+        &_List {
+          text-align: center;
+          @include mediaQuery(min, 1024, 0){
+            font-size: 0;
+          }
+          @include mediaQuery(max, 0, 1023){
+          }
+          &_Item {
+            @include mediaQuery(min, 1024, 0){
+              display: inline-block;
+              vertical-align: middle;
+              width: 384px;
+            }
+            @include mediaQuery(max, 0, 1023){
+              width: (672 / 768) * 100vw;
+            }
+            &-Github {
+              @include mediaQuery(min, 1024, 0){
+                margin: 0 0 0 32px;
+              }
+              @include mediaQuery(max, 0, 1023){
+              }
+            }
+            .Item_Button {
+              display: block;
+              color: $color-white;
+              background-color: $color-blue;
+              letter-spacing: 0.05em;
+              line-height: 1;
+              text-align: center;
+              text-decoration: none;
+              @include mediaQuery(min, 1024, 0){
+                padding: 20px 0 22px;
+                width: 384px;
+                border-radius: 4px;
+                box-shadow: 0 4px 0 $color-gray;
+                font-size: 16px;
+                transition: .32s $animation-transition;
+              }
+              @include mediaQuery(max, 0, 1023){
+                padding: (24 / 768) * 100vw 0 (28 / 768) * 100vw;
+                width: (672 / 768) * 100vw;
+                border-radius: (8 / 768) * 100vw;
+                box-shadow: 0 (8 / 768) * 100vw 0 $color-gray;
+                font-size: (28 / 768) * 100vw;
+              }
+              &:hover {
+                @include mediaQuery(min, 1024, 0){
+                  background-color: darken($color-blue, 8%);
+                  box-shadow: none;
+                  transform: translateY(4px);
+                }
+              }
+            }
+          }
+        }
+      }
+      .Content_Text {
+        @include mediaQuery(min, 1024, 0){
+          margin: 64px 0 0 0;
+        }
+        @include mediaQuery(max, 0, 1023){
+          margin: 9.375vw 0 0 0;
+        }
+        h4 {
+          color: $color-white;
+          background-color: $color-gray;
+          line-height: 2;
+          letter-spacing: 0.05em;
+          @include mediaQuery(min, 1024, 0){
+            padding: 12px 16px;
+            font-size: 16px;
+            border-radius: 4px;
+          }
+          @include mediaQuery(max, 0, 1023){
+            padding: 2.625vw 3.125vw;
+            font-size: (28 / 768) * 100vw;
+            border-radius: (8 / 768) * 100vw;
+          }
+        }
+        h5 + h4, p + h4, .Content_Text_List + h4 {
+          @include mediaQuery(min, 1024, 0){
+            margin: 52px 0 0 0;
+          }
+          @include mediaQuery(max, 0, 1023){
+            margin: 9.375vw 0 0 0;
+          }
+        }
+        h5 {
+          display: inline-block;
+          line-height: 2;
+          letter-spacing: 0.05em;
+          position: relative;
+          @include mediaQuery(min, 1024, 0){
+            padding: 2px 0 2px 16px;
+            font-size: 16px;
+          }
+          @include mediaQuery(max, 0, 1023){
+            padding: 1.0625vw 0 1.0625vw 3.125vw;
+            font-size: (28 / 768) * 100vw;
+          }
+          &::before {
+            content: "";
+            display: block;
+            background-color: $color-gray;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            @include mediaQuery(min, 1024, 0){
+              width: 4px;
+              border-radius: 4px;
+            }
+            @include mediaQuery(max, 0, 1023){
+              width: 2px;
+              border-radius: (8 / 768) * 100vw;
+            }
+          }
+        }
+        h4 + h5, p + h5 {
+          @include mediaQuery(min, 1024, 0){
+            margin: 24px 0 0 0;
+          }
+          @include mediaQuery(max, 0, 1023){
+            margin: 5.1875vw 0 0 0;
+          }
+        }
+        p {
+          line-height: 2;
+          letter-spacing: 0.05em;
+          @include mediaQuery(min, 1024, 0){
+            font-size: 16px;
+          }
+          @include mediaQuery(max, 0, 1023){
+            font-size: (28 / 768) * 100vw;
+          }
+        }
+        h4 + p, h5 + p, p + p {
+          @include mediaQuery(min, 1024, 0){
+            margin: 16px 0 0 0;
+          }
+          @include mediaQuery(max, 0, 1023){
+            margin: 4.1875vw 0 0 0;
+          }
+        }
+        &_List {
+          @include mediaQuery(min, 1024, 0){
+            margin: 16px 0 0 0;
+          }
+          @include mediaQuery(max, 0, 1023){
+            margin: 0 0 0 0;
+          }
+          &_Item {
+            p {
+              padding-left: 1em;
+              text-indent: -1em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+/* =============================================================== */
+/* .st-Pagenation */
+/* =============================================================== */
+.st-Pagenation {
+  @include mediaQuery(min, 1024, 0){
+    margin: 80px 0 0 0;
+  }
+  @include mediaQuery(max, 0, 1023){
+  }
+  .wp-pagenavi {
+    text-align: center;
+    font-size: 0;
+    .pages {
+      display: none;
+    }
+    span, a.page {
+      display: inline-block;
+      vertical-align: middle;
+      color: $color-white;
+      background-color: $color-blue;
+      @include font-family-en;
+      letter-spacing: 0.0625em;
+      transition: .4s $animation-transition;
+      @include mediaQuery(min, 1024, 0){
+        width: 40px;
+        height: 48px;
+        font-size: 12px;
+        line-height: 48px;
+        border-radius: 4px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        border-radius: (4 / 768) * 100vw;
+      }
+    }
+    a.page:hover {
+      background-color: darken($color-blue, 8%);
+    }
+    span.current {
+      background-color: darken($color-blue, 8%);
+    }
+    a.nextpostslink, a.previouspostslink {
+      display: inline-block;
+      vertical-align: middle;
+      color: $color-white;
+      background-color: $color-blue;
+      @include font-family-en;
+      letter-spacing: 0.0625em;
+      transition: .4s $animation-transition;
+      @include mediaQuery(min, 1024, 0){
+        width: 40px;
+        height: 48px;
+        font-size: 12px;
+        line-height: 48px;
+      }
+      @include mediaQuery(max, 0, 1023){}
+      &:hover {
+        @include mediaQuery(min,1024,0){
+          background-color: darken($color-blue, 8%);
         }
       }
     }

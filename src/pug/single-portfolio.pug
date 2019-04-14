@@ -24,23 +24,60 @@ block config
 block css
   link(rel="stylesheet" href!=config.pathTemplate + "assets/css/portfolio/style.css?hash=" + config.hash)
 block js
+  script(src!=config.pathTemplate + "assets/js/lib.min.js?hash=" + config.hash)
   script(src!=config.pathTemplate + "assets/js/portfolio/app.bundle.js?hash=" + config.hash)
 block content
   div.st-Container
     |
     | <?php get_header(); ?>
-    section.por-Detail
-      div.por-Detail_Box
+    section.st-Detail
+      div.st-Detail_Box
         h2.sw-Title
           span
             | Portfolio
-        div.por-Detail_Box_Content
-          h3.content_Title
+        div.st-Detail_Box_Content
+          h3.Content_Title
             | <?php the_title(); ?>
-          p.content_Date
-            | <?php the_time('Y.m.d.'); ?>
-          div.content_Text
+          p.Content_Date
+            | <?php the_field('portfolio_date'); ?>
+          figure.Content_Thumbnail
+            | <?php the_post_thumbnail(); ?>
+          div.Content_Link
+            ul.Content_Link_List
+              li.Content_Link_List_Item.Content_Link_List_Item-Page
+                a.Item_Button(href!="<?php the_field('portfolio_url_page'); ?>" target="_blank")
+                  | Page
+              li.Content_Link_List_Item.Content_Link_List_Item-Github
+                a.Item_Button(href!="<?php the_field('portfolio_url_github'); ?>" target="_blank")
+                  | Github
+          div.Content_Text
             | <?php the_content(); ?>
+            h4
+              | 頑張ったポイント
+            ul.Content_Text_List
+              | <?php
+              |   $good_text  = get_field('portfolio_point_good');
+              |   $good_array = explode("\n", $good_text);
+              |   $good_array = array_map('trim', $good_array);
+              |   $good_array = array_filter($good_array, 'strlen');
+              |   $good_array = array_values($good_array);
+              |   foreach($good_array as $good_item):
+              |   echo '<li class="Content_Text_List_Item"><p>・' . $good_item . '</p></li>';
+              |   endforeach;
+              | ?>
+            h4
+              | 改善が必要なポイント
+            ul.Content_Text_List
+              | <?php
+              |   $bad_text  = get_field('portfolio_point_bad');
+              |   $bad_array = explode("\n", $bad_text);
+              |   $bad_array = array_map('trim', $bad_array);
+              |   $bad_array = array_filter($bad_array, 'strlen');
+              |   $bad_array = array_values($bad_array);
+              |   foreach($bad_array as $bad_item):
+              |   echo '<li class="Content_Text_List_Item"><p>・' . $bad_item . '</p></li>';
+              |   endforeach;
+              | ?>
         //- div.st-Posts.st-Posts-Index
           ul.st-Posts_List
             li.st-Posts_List_Item

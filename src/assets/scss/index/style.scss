@@ -33,6 +33,71 @@
 
 
 /* =============================================================== */
+/* .idx-Loading */
+/* =============================================================== */
+.idx-Loading {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  &_Child {
+    width: 100%;
+    height: 20vh;
+    background-color: $color-blue;
+    transition: .8s $animation-transition;
+    &-01 {
+      top: 0;
+      transition-delay: 0;
+    }
+    &-02 {
+      top: 20vh;
+      transition-delay: .1s;
+    }
+    &-03 {
+      top: 40vh;
+      transition-delay: .2s;
+    }
+    &-04 {
+      top: 60vh;
+      transition-delay: .3s;
+    }
+    &-05 {
+      top: 80vh;
+      transition-delay: .4s;
+    }
+  }
+  // &::before, &::after {
+  //   content: "";
+  //   display: block;
+  //   width: 100%;
+  //   height: 50%;
+  //   background-color: $color-blue;
+  //   position: absolute;
+  //   transition: .8s $animation-transition;
+  // }
+  // &::before {
+  //   top: 0;
+  // }
+  // &::after {
+  //   bottom: 0;
+  // }
+  &-Hidden {
+    pointer-events: none;
+    .idx-Loading_Child {
+      transform: translateX(-120%);
+    }
+    // &::before {
+    //   transform: translateY(-125%);
+    // }
+    // &::after {
+    //   transform: translateY(250%);
+    // }
+  }
+}
+
+
+
+/* =============================================================== */
 /* .idx-Main */
 /* =============================================================== */
 .idx-Main {
@@ -57,24 +122,196 @@
   }
   &_Slider {
     margin: 0 auto;
-    box-sizing: border-box;
-    background-color: $color-white;
+    width: 100%;
+    text-align: center;
     position: relative;
     z-index: 2;
     @include mediaQuery(min, 1024, 0){
-      width: 800px;
+      // width: 800px;
       height: 450px;
-      border: 2px solid $color-blue;
-      border-radius: 4px;
     }
     @include mediaQuery(max, 0, 1023){
-      width: (672 / 768) * 100vw;
+      // width: (672 / 768) * 100vw;
       height: (378 / 768) * 100vw;
-      border: 2px solid $color-blue;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    &_List {
+      position: relative;
+      z-index: 1;
+      @include mediaQuery(min, 1024, 0){
+      }
+      @include mediaQuery(max, 0, 1023){
+      }
+      &_Item {
+        position: relative;
+        overflow: hidden;
+        transition: .4s $animation-transition;
+        transition-delay: .4s;
+        @include mediaQuery(min, 1024, 0){
+          width: 800px;
+          height: 450px;
+          border-radius: 4px;
+        }
+        @include mediaQuery(max, 0, 1023){
+          width: (672 / 768) * 100vw;
+          height: (378 / 768) * 100vw;
+          border-radius: (8 / 768) * 100vw;
+        }
+        &::before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 2px solid $color-blue;
+          box-sizing: border-box;
+          pointer-events: none;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          @include mediaQuery(min, 1024, 0){
+            border-radius: 4px;
+          }
+          @include mediaQuery(max, 0, 1023){
+            border-radius: (8 / 768) * 100vw;
+          }
+        }
+      }
+      .Item-Anchor {
+        display: block;
+        outline: none;
+        position: relative;
+        z-index: 1;
+        @include mediaQuery(min, 1024, 0){
+        }
+        @include mediaQuery(max, 0, 1023){
+        }
+      }
+      .Item_Thumbnail {
+        line-height: 0;
+        img {
+          @include mediaQuery(min, 1024, 0){
+            border-radius: 4px;
+          }
+          @include mediaQuery(max, 0, 1023){
+            border-radius: (8 / 768) * 100vw;
+          }
+        }
+      }
+      .Item_Info {
+        width: 100%;
+        background-color: rgba($color-gray, 0.8);
+        transition: .4s $animation-transition;
+        transition-delay: .4s;
+        position: absolute;
+        bottom: 0;
+        @include mediaQuery(min, 1024, 0){
+          padding: 20px 0;
+        }
+        @include mediaQuery(max, 0, 1023){
+        }
+        &_Description {
+          color: $color-white;
+          @include font-family-en;
+          letter-spacing: 0.0625em;
+          @include mediaQuery(min, 1024, 0){
+            font-size: 12px;
+          }
+          @include mediaQuery(max, 0, 1023){
+          }
+        }
+        &_Title {
+          color: $color-white;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          line-height: 1.6;
+          @include mediaQuery(min, 1024, 0){
+            margin: 12px 0 0 0;
+            font-size: 16px;
+          }
+          @include mediaQuery(max, 0, 1023){
+          }
+        }
+      }
+    }
+  }
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .slick-arrow.slick-prev {
+    left: 0;
+    @include mediaQuery(min, 1024, 0){
+    }
+    @include mediaQuery(max, 0, 1023){
+    }
+  }
+  .slick-arrow.slick-next {
+    right: 0;
+    @include mediaQuery(min, 1024, 0){
+    }
+    @include mediaQuery(max, 0, 1023){
+    }
+  }
+  .slick-slide {
+    opacity: 0.25;
+    transform: scale(0.875, 0.825);
+    .Item_Info {
+      @include mediaQuery(min, 1024, 0){
+        transform: translateY(38px);
+      }
+      @include mediaQuery(max, 0, 1023){
+      }
+    }
+  }
+  .slick-slide.slick-current {
+    opacity: 1;
+    transform: scale(1);
+    .Item_Info {
+      transform: translateY(0);
+    }
+  }
+  .slick-dots {
+    text-align: center;
+    @include mediaQuery(min, 1024, 0){
+      margin: 24px 0 0 0;
+    }
+    @include mediaQuery(max, 0, 1023){
+    }
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      @include mediaQuery(min, 1024, 0){
+      }
+      @include mediaQuery(max, 0, 1023){
+      }
+      button {
+        background-color: $color-white;
+        font-size: 0;
+        transition: .4s $animation-transition;
+        @include mediaQuery(min, 1024, 0){
+          width: 16px;
+          height: 16px;
+          border-radius: 8px;
+        }
+        @include mediaQuery(max, 0, 1023){
+        }
+      }
+      &.slick-active button {
+        background-color: $color-blue;
+      }
+    }
+    li + li {
+      @include mediaQuery(min, 1024, 0){
+        margin: 0 0 0 12px;
+      }
+      @include mediaQuery(max, 0, 1023){
+      }
     }
   }
 }
@@ -194,7 +431,7 @@
         text-align: center;
         text-decoration: none;
         @include mediaQuery(min, 1024, 0){
-          padding: 14px 0 16px;
+          padding: 20px 0 22px;
           margin: 80px 0 0 0;
           width: 320px;
           border-radius: 4px;
@@ -203,7 +440,7 @@
           transition: .32s $animation-transition;
         }
         @include mediaQuery(max, 0, 1023){
-          padding: 14px 0 16px;
+          padding: (24 / 768) * 100vw 0 (28 / 768) * 100vw;
           margin: (64 / 768) * 100vw auto 0;
           width: (672 / 768) * 100vw;
           border-radius: (8 / 768) * 100vw;
