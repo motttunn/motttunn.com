@@ -1,7 +1,10 @@
 .DS_Store
 /portfolio-sample/
 /work/
+/wp/index.php
+/wp/.htaccess
 /wp/wp-admin/
+/wp/wp-content/uploads/
 /wp/wp-content/languages/
 /wp/wp-content/plugins/
 /wp/wp-content/themes/twentynineteen/
