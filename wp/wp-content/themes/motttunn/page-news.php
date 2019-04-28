@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=7997494">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=7343090">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -35,7 +35,7 @@
       <?php get_header(); ?>
       <section class="new-Archive">
         <div class="new-Archive_Box">
-          <h2 class="sw-Title"><span>News</span></h2>
+          <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/news/">News</a></h2>
           <div class="st-Posts st-Posts-News">
             <ul class="st-Posts_List">
               <?php
@@ -63,7 +63,7 @@
               ?>
             </ul>
           </div>
-          <div class="st-Pagenation">
+          <div class="st-Pagenation st-Pagenation-News">
             <?php
               wp_pagenavi(array('query' => $post_query));
             ?>
@@ -72,8 +72,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=7997494"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=7997494"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=7343090"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=7343090"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

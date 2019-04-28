@@ -27,6 +27,8 @@ block content
       div.idx-Loading_Child.idx-Loading_Child-04
       div.idx-Loading_Child.idx-Loading_Child-05
     main.idx-Main
+      button#idx-Main_Scroll.idx-Main_Scroll.sp_b
+        | SCROLL
       div.idx-Main_Slider
         ul#idx-Main_Slider_List.idx-Main_Slider_List
           | <?php
@@ -64,19 +66,10 @@ block content
           |   endwhile;
           |   endif;
           | ?>
-          //- li.idx-Main_Slider_List_Item
-          //-   a.Item-Anchor(href!="#" target="_blank")
-          //-     img.Item_Thumbnail(src!=config.pathTemplate + "assets/images/common/thumb-sample01.jpg" width="800" height="450")
-          //- li.idx-Main_Slider_List_Item
-          //-   a.Item-Anchor(href!="#" target="_blank")
-          //-     img.Item_Thumbnail(src!=config.pathTemplate + "assets/images/common/thumb-sample02.jpg" width="800" height="450")
-          //- li.idx-Main_Slider_List_Item
-          //-   a.Item-Anchor(href!="#" target="_blank")
-          //-     img.Item_Thumbnail(src!=config.pathTemplate + "assets/images/common/thumb-sample03.jpg" width="800" height="450")
     section.idx-News
       div.idx-News_Box
         h2.sw-Title
-          span
+          a(href!=config.pathHome + "news/")
             | News
         div.st-Posts.st-Posts-Index
           ul.st-Posts_List
@@ -108,17 +101,23 @@ block content
     section.idx-Portfolio
       div.idx-Portfolio_Box
         h2.sw-Title
-          span
+          a(href!=config.pathHome + "portfolio/")
             | Portfolio
         div.st-Works.st-Works-Index
           ul.st-Works_List
             | <?php
+            |   $work_count = 0;
+            |   $work_class = 'st-Works_List_Item-Left';
             |   $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 4);
             |   $work_query = new WP_Query($work_args);
             |   if($work_query->have_posts()):
             |   while($work_query->have_posts()): $work_query->the_post();
+            |   if($work_count%2 !== 0):
+            |   $work_class = 'st-Works_List_Item-Right';
+            |   endif;
+            |   $work_count++;
             | ?>
-            li.st-Works_List_Item.st-Works_List_Item-Left
+            li.st-Works_List_Item(class!="<?php echo $work_class; ?>")
               a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
                   | <?php the_post_thumbnail(); ?>
@@ -146,25 +145,6 @@ block content
             |   endwhile;
             |   endif;
             | ?>
-          //- ul.st-Works_List
-            li.st-Works_List_Item.st-Works_List_Item-Left
-              a.Item-Anchor(href!="#")
-                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
-                div.Item_Description
-                  div.Item_Description_Box
-                    h3.Item_Description_Box_Title
-                      | Diamond
-                    p.Item_Description_Box_Text
-                      | WebGLを使用して、ダイヤモンドを描画。
-            li.st-Works_List_Item.st-Works_List_Item-Right
-              a.Item-Anchor(href!="#")
-                figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
-                div.Item_Description
-                  div.Item_Description_Box
-                    h3.Item_Description_Box_Title
-                      | Cylinder
-                    p.Item_Description_Box_Text
-                      | WebGLを使用して、円柱を描画。
     section.idx-About
       div.idx-About_Box
         div.idx-About_Box_Introduction
@@ -178,18 +158,16 @@ block content
             br.pc_i
             | 趣味は読書とゲーム(splatoon2)。
           p.idx-About_Box_Introduction_Text
-            | 抽象的ではありますが、
+            | Web上での3D表現について興味があり、
             br.pc_i
-            | もっとクリエイティブなweb制作を仕事にしたいという気持ちがあり、
-            br.pc_i
-            | 現在転職活動中です。
+            | 現在勉強および転職活動中です。
         div.idx-About_Box_Links
           h2.sw-Title
             span
               | Links
-          a.idx-About_Box_Links_Button(href!="#" target="_blank")
+          a.idx-About_Box_Links_Button(href!="https://github.com/motttunn" target="_blank")
             | GitHub
-          a.idx-About_Box_Links_Button(href!="#" target="_blank")
+          a.idx-About_Box_Links_Button(href!="https://twitter.com/motttunn" target="_blank")
             | Twitter
     |
     | <?php get_footer(); ?>

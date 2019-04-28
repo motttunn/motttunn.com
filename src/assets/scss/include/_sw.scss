@@ -2,7 +2,6 @@
 /* .sw-Title */
 /* =============================================================== */
 .sw-Title {
-  color: $color-blue;
   font-family: 'Lato', sans-serif;
   letter-spacing: 0.04em;
   position: relative;
@@ -14,8 +13,9 @@
   @include mediaQuery(max, 0, 1023){
     font-size: (56 / 768) * 100vw;
   }
-  span {
+  span, a {
     display: inline-block;
+    color: $color-blue;
     position: relative;
     @include mediaQuery(min, 1024, 0){
       padding: 0 24px 0 0;

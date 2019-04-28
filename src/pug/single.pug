@@ -33,7 +33,7 @@ block content
     section.st-Detail
       div.st-Detail_Box
         h2.sw-Title
-          span
+          a(href!=config.pathHome + "news/")
             | News
         div.st-Detail_Box_Content
           h3.Content_Title
@@ -44,49 +44,18 @@ block content
             | <?php the_post_thumbnail(); ?>
           div.Content_Text
             | <?php the_content(); ?>
-        //- div.st-Posts.st-Posts-Index
-          ul.st-Posts_List
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
-            li.st-Posts_List_Item
-              a.Item-Anchor(href!="#")
-                p.Item_Date
-                  | 2019.00.00
-                img.Item_Thumbnail
-                h3.Item_Title
-                  | テキスト1テキスト2テキスト3テキスト4テキスト5テキスト1テキスト2テキスト3テキスト4
+          div.Content_PrevNext
+            | <?php
+            |   $item_current = get_the_permalink();
+            |   $item_prev    = get_permalink(get_adjacent_post(false, '', true));
+            |   $item_next    = get_permalink(get_adjacent_post(false, '', false));
+            |   if($item_prev !== $item_current):
+            | ?>
+            a.Content_PrevNext_Prev(href!="<?php echo $item_prev; ?>")
+              | <<　Prev
+            | <?php endif; if($item_next !== $item_current): ?>
+            a.Content_PrevNext_Next(href!="<?php echo $item_next; ?>")
+              | Next　>>
+            | <?php endif; ?>
     |
     | <?php get_footer(); ?>

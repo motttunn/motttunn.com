@@ -1,0 +1,24 @@
+extends include/_layout
+block meta
+  - meta = {}
+  - meta.title = ''
+  - meta.keywords = ''
+  - meta.description = ''
+  - meta.url = ''
+  - meta.img = ''
+block config
+  - config = {}
+  - config.path = './'
+  - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+block css
+  link(rel="stylesheet" href!=config.path + "assets/css/style.css?hash=" + config.hash)
+block js
+  script(src!=config.path + "assets/js/bundle.js?hash=" + config.hash)
+block content
+  div.st-Container
+    div.idx-Slider
+      input#idx-Slider_Range.idx-Slider_Range(type="range" min="0" max="1" step="0.01")
+      p.idx-Slider_Text
+        | Threshold : 
+        span#idx-Slider_Text_Value.idx-Slider_Text_Value
+          | 0.5

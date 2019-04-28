@@ -31,8 +31,14 @@ add_filter('aioseop_next_link', '__return_empty_string' );
 
 
 
-
 add_theme_support('post-thumbnails');
+
+
+
+add_filter('excerpt_more', 'custom_excerpt_more');
+function custom_excerpt_more($more) {
+  return '...';
+}
 
 
 

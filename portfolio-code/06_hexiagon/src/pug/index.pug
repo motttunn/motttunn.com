@@ -1,0 +1,21 @@
+extends include/_layout
+block meta
+  - meta = {}
+  - meta.title = ''
+  - meta.keywords = ''
+  - meta.description = ''
+  - meta.url = ''
+  - meta.img = ''
+block config
+  - config = {}
+  - config.path = './'
+  - config.hash = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+block css
+  link(rel="stylesheet" href!=config.path + "assets/css/style.css?hash=" + config.hash)
+block js
+  script(src!=config.path + "assets/js/bundle.js?hash=" + config.hash)
+block content
+  div.st-Container
+    div.idx-Movie
+      video#idx-Movie_Video.idx-Movie_Video(src!=config.path + "assets/movie/mazwai-kingdom.mp4" loop muted)
+      //- download from http://mazwai.com/#/grid/videos/215

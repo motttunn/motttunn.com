@@ -3,6 +3,7 @@ let resizeFlag   = false;
 let windowWidth  = window.innerWidth;
 let windowHeight = window.innerHeight;
 let windowWidthJ = $(window).width();
+let windowHeightJ = $(window).height();
 
 
 
@@ -87,45 +88,51 @@ const parallaxThumbnail = () => {
 // ----- BOTH
 // ------------------------------------------------------------------------
 const slickMain = () => {
+  var slickObject  = 0;
   var slickWidth   = 0;
   var slickPadding = 0;
   $(window).on('load', function(){
     if(windowWidthJ > breakPoint){
       slickWidth   = 800;
-      slickPadding = (windowWidthJ - 800) / 2;
+      slickPadding = (windowWidthJ - slickWidth) / 2;
     } else {
-
+      slickWidth   = windowWidthJ * 0.875;
+      slickPadding = (windowWidthJ - slickWidth) / 2;
     }
-    $('#idx-Main_Slider_List').slick({
+    slickObject = $('#idx-Main_Slider_List').slick({
       speed: 600,
       centerMode: true,
       centerPadding: slickPadding + "px",
       arrows: false,
       dots: true
-      // responsive: [
-      // {
-      //   breakpoint: 768,
-      //   settings: {
-      //     arrows: false,
-      //     centerMode: true,
-      //     centerPadding: '40px',
-      //     slidesToShow: 3
-      //   }
-      // },
-      // ]
     });
   });
   $(window).on('resize', function(){
     var resizeWidthJ = $(window).width();
     if(resizeWidthJ > breakPoint){
       slickWidth   = 800;
-      slickPadding = (resizeWidthJ - 800) / 2;
+      slickPadding = (resizeWidthJ - slickWidth) / 2;
     } else {
-
+      slickWidth   = resizeWidthJ * 0.875;
+      slickPadding = (resizeWidthJ - slickWidth) / 2;
     }
-    $('#idx-Main_Slider_List')[0].slick.options.centerPadding = slickPadding + "px";
+    slickObject[0].slick.options.centerPadding = slickPadding + "px";
   });
 };
+
+
+
+// ------------------------------------------------------------------------
+// scrollPage
+// ----- BOTH
+// ------------------------------------------------------------------------
+const scrollPage = () => {
+  $("#idx-Main_Scroll").on("click", function(){
+    var scrollSpeed    = 800;
+    var scrollPosition = windowHeightJ;
+    $("html, body").animate({scrollTop: scrollPosition}, scrollSpeed, "swing");
+  });
+}
 
 
 
@@ -157,5 +164,6 @@ export {
   toggleHeader,
   parallaxThumbnail,
   slickMain,
+  scrollPage,
   anchorLink
 }

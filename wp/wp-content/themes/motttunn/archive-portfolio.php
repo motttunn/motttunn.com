@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=3236118">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=8204852">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -35,17 +35,23 @@
       <?php get_header(); ?>
       <section class="por-Archive">
         <div class="por-Archive_Box">
-          <h2 class="sw-Title"><span>Portfolio</span></h2>
+          <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/portfolio/">Portfolio</a></h2>
           <div class="st-Works st-Works-News">
             <ul class="st-Works_List">
               <?php
+                $work_count = 0;
+                $work_class = 'st-Works_List_Item-Left';
                 $work_paged = get_query_var('paged', 1);
                 $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 8);
                 $work_query = new WP_Query($work_args);
                 if($work_query->have_posts()):
                 while($work_query->have_posts()): $work_query->the_post();
+                if($work_count%2 !== 0):
+                $work_class = 'st-Works_List_Item-Right';
+                endif;
+                $work_count++;
               ?>
-              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+              <li class="st-Works_List_Item <?php echo $work_class; ?>"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
                   <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <div class="Item_Description">
                     <div class="Item_Description_Box">
@@ -76,7 +82,7 @@
               ?>
             </ul>
           </div>
-          <div class="st-Pagenation">
+          <div class="st-Pagenation st-Pagenation-Portfolio">
             <?php
               wp_pagenavi(array('query' => $work_query));
             ?>
@@ -85,8 +91,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=3236118"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=3236118"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=8204852"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=8204852"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

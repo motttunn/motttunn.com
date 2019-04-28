@@ -22,7 +22,7 @@ block content
     section.new-Archive
       div.new-Archive_Box
         h2.sw-Title
-          span
+          a(href!=config.pathHome + "news/")
             | News
         div.st-Posts.st-Posts-News
           ul.st-Posts_List
@@ -52,7 +52,7 @@ block content
             |   endwhile;
             |   endif;
             | ?>
-        div.st-Pagenation
+        div.st-Pagenation.st-Pagenation-News
           | <?php
           |   wp_pagenavi(array('query' => $post_query));
           | ?>

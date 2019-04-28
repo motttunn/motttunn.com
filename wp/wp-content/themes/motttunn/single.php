@@ -37,7 +37,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=4967131">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=8060704">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -46,19 +46,27 @@
       <?php get_header(); ?>
       <section class="st-Detail">
         <div class="st-Detail_Box">
-          <h2 class="sw-Title"><span>News</span></h2>
+          <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/news/">News</a></h2>
           <div class="st-Detail_Box_Content">
             <h3 class="Content_Title"><?php the_title(); ?></h3>
             <p class="Content_Date"><?php the_time('Y.m.d.'); ?></p>
             <figure class="Content_Thumbnail"><?php the_post_thumbnail(); ?></figure>
             <div class="Content_Text"><?php the_content(); ?></div>
+            <div class="Content_PrevNext">
+              <?php
+                $item_current = get_the_permalink();
+                $item_prev    = get_permalink(get_adjacent_post(false, '', true));
+                $item_next    = get_permalink(get_adjacent_post(false, '', false));
+                if($item_prev !== $item_current):
+              ?><a class="Content_PrevNext_Prev" href="<?php echo $item_prev; ?>"><<　Prev</a><?php endif; if($item_next !== $item_current): ?><a class="Content_PrevNext_Next" href="<?php echo $item_next; ?>">Next　>></a><?php endif; ?>
+            </div>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=4967131"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=4967131"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=8060704"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=8060704"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

@@ -22,18 +22,24 @@ block content
     section.por-Archive
       div.por-Archive_Box
         h2.sw-Title
-          span
+          a(href!=config.pathHome + "portfolio/")
             | Portfolio
         div.st-Works.st-Works-News
           ul.st-Works_List
             | <?php
+            |   $work_count = 0;
+            |   $work_class = 'st-Works_List_Item-Left';
             |   $work_paged = get_query_var('paged', 1);
             |   $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 8);
             |   $work_query = new WP_Query($work_args);
             |   if($work_query->have_posts()):
             |   while($work_query->have_posts()): $work_query->the_post();
+            |   if($work_count%2 !== 0):
+            |   $work_class = 'st-Works_List_Item-Right';
+            |   endif;
+            |   $work_count++;
             | ?>
-            li.st-Works_List_Item.st-Works_List_Item-Left
+            li.st-Works_List_Item(class!="<?php echo $work_class; ?>")
               a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
                   | <?php the_post_thumbnail(); ?>
@@ -61,7 +67,7 @@ block content
             |   endwhile;
             |   endif;
             | ?>
-        div.st-Pagenation
+        div.st-Pagenation.st-Pagenation-Portfolio
           | <?php
           |   wp_pagenavi(array('query' => $work_query));
           | ?>

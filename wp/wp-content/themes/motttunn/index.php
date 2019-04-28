@@ -26,8 +26,8 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/lib.min.css?hash=5571114">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=5571114">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/lib.min.css?hash=4289768">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=4289768">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -35,6 +35,7 @@
       
       <?php get_header(); ?>
       <main class="idx-Main">
+        <button class="idx-Main_Scroll sp_b" id="idx-Main_Scroll">SCROLL</button>
         <div class="idx-Main_Slider">
           <ul class="idx-Main_Slider_List" id="idx-Main_Slider_List">
             <?php
@@ -77,7 +78,7 @@
       </main>
       <section class="idx-News">
         <div class="idx-News_Box">
-          <h2 class="sw-Title"><span>News</span></h2>
+          <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/news/">News</a></h2>
           <div class="st-Posts st-Posts-Index">
             <ul class="st-Posts_List">
               <?php
@@ -108,16 +109,22 @@
       </section>
       <section class="idx-Portfolio">
         <div class="idx-Portfolio_Box">
-          <h2 class="sw-Title"><span>Portfolio</span></h2>
+          <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/portfolio/">Portfolio</a></h2>
           <div class="st-Works st-Works-Index">
             <ul class="st-Works_List">
               <?php
+                $work_count = 0;
+                $work_class = 'st-Works_List_Item-Left';
                 $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 4);
                 $work_query = new WP_Query($work_args);
                 if($work_query->have_posts()):
                 while($work_query->have_posts()): $work_query->the_post();
+                if($work_count%2 !== 0):
+                $work_class = 'st-Works_List_Item-Right';
+                endif;
+                $work_count++;
               ?>
-              <li class="st-Works_List_Item st-Works_List_Item-Left"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
+              <li class="st-Works_List_Item <?php echo $work_class; ?>"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
                   <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <div class="Item_Description">
                     <div class="Item_Description_Box">
@@ -155,17 +162,17 @@
           <div class="idx-About_Box_Introduction">
             <h2 class="sw-Title"><span>Introduction</span></h2>
             <p class="idx-About_Box_Introduction_Text">web制作に関する備忘録およびポートフォリオサイトです。<br class="pc_i">運営している人間は粉物とビールが大好きな20歳児。<br class="pc_i">趣味は読書とゲーム(splatoon2)。</p>
-            <p class="idx-About_Box_Introduction_Text">抽象的ではありますが、<br class="pc_i">もっとクリエイティブなweb制作を仕事にしたいという気持ちがあり、<br class="pc_i">現在転職活動中です。</p>
+            <p class="idx-About_Box_Introduction_Text">Web上での3D表現について興味があり、<br class="pc_i">現在勉強および転職活動中です。</p>
           </div>
           <div class="idx-About_Box_Links">
-            <h2 class="sw-Title"><span>Links</span></h2><a class="idx-About_Box_Links_Button" href="#" target="_blank">GitHub</a><a class="idx-About_Box_Links_Button" href="#" target="_blank">Twitter</a>
+            <h2 class="sw-Title"><span>Links</span></h2><a class="idx-About_Box_Links_Button" href="https://github.com/motttunn" target="_blank">GitHub</a><a class="idx-About_Box_Links_Button" href="https://twitter.com/motttunn" target="_blank">Twitter</a>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/lib.min.js?hash=5571114"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/app.bundle.js?hash=5571114"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/lib.min.js?hash=4289768"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/app.bundle.js?hash=4289768"></script>
     <?php wp_footer(); ?>
   </body>
 </html>
