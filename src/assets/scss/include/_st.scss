@@ -13,6 +13,19 @@
 .st-Header {
   position: relative;
   z-index: 2;
+  &_Logo {
+    display: block;
+    position: fixed;
+    left: 0;
+    @include mediaQuery(min, 1024, 0){
+      width: 200px;
+      top: 32px;
+    }
+    @include mediaQuery(max, 0, 1023){
+      width: (328 / 768) * 100vw;
+      top: (40 / 768) * 100vw;
+    }
+  }
   &_Button {
     display: block;
     color: $color-white;
@@ -31,14 +44,14 @@
       width: 120px;
       border-radius: 4px 0 0 4px;
       font-size: 14px;
-      top: 40px;
+      top: 32px;
     }
     @include mediaQuery(max, 0, 1023){
       padding: (20 / 768) * 100vw 0 (20 / 768) * 100vw (24 / 768) * 100vw;
       width: (160 / 768) * 100vw;
       border-radius: (8 / 768) * 100vw 0 0 (8 / 768) * 100vw;
       font-size: (28 / 768) * 100vw;
-      top: (48 / 768) * 100vw;
+      top: (40 / 768) * 100vw;
     }
     &-Hidden {
       @include mediaQuery(min, 1024, 0){
@@ -54,11 +67,11 @@
     z-index: 2;
     transition: .4s $animation-transition;
     @include mediaQuery(min, 1024, 0){
-      top: 40px;
+      top: 32px;
       right: -40px;
     }
     @include mediaQuery(max, 0, 1023){
-      top: (48 / 768) * 100vw;
+      top: (40 / 768) * 100vw;
       right: -(48 / 768) * 100vw;
     }
     &-Hidden {
@@ -139,7 +152,7 @@
     margin: 160px 0 0 0;
   }
   @include mediaQuery(max, 0, 1023){
-    margin: (168 / 768) * 100vw 0 0 0;
+    margin: (136 / 768) * 100vw 0 0 0;
   }
   &_Box {
     margin: 0 auto;
@@ -594,7 +607,7 @@
     padding: 120px 0 0 0;
   }
   @include mediaQuery(max, 0, 1023){
-    padding: (160 / 1024) * 100vw 0 0 0;
+    padding: (256 / 1024) * 100vw 0 0 0;
   }
   &_Box {
     margin: 0 auto;

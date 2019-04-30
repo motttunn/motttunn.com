@@ -26,18 +26,18 @@
     <meta property="og:title" content="<?php the_title(); ?> | Portfolio | motttunn.com">
     <meta property="og:site_name" content="<?php the_title(); ?> | Portfolio | motttunn.com">
     <meta property="og:description" content="<?php echo $post_meta_desc; ?>">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="https://motttunn.com/wp/wp-content/themes/motttunn/assets/images/common/ogp.png">
     <meta property="og:locale" content="ja_JP">
     <meta property="fb:app_id" content="">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:image" content="https://motttunn.com/wp/wp-content/themes/motttunn/assets/images/common/ogp.png">
     <link rel="canonical" href="https://motttunn.com/portfolio/">
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=1277268">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=2879533">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -98,8 +98,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=1277268"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=1277268"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=2879533"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=2879533"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

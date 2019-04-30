@@ -109,10 +109,10 @@ let qty = qt4.identity(qt4.create());
 
   const initialize = () => {
 
-    vertexPosition.push(0.0,  1.0, 0.0);
-    vertexPosition.push(0.0, -1.0, 0.0);
-    vertexColor.push(0.25, 1.0, 1.0, 1.0);
-    vertexColor.push(0.25, 1.0, 1.0, 1.0);
+    vertexPosition.push(0.0,  1.25, 0.0);
+    vertexPosition.push(0.0, -0.75, 0.0);
+    vertexColor.push(0.0, 0.75, 0.65, 1.0);
+    vertexColor.push(0.0, 0.75, 0.65, 1.0);
 
     (() => {
       const SPLIT  = 8;
@@ -122,10 +122,10 @@ let qty = qt4.identity(qt4.create());
         let r = RADIAN * i;
         let s = Math.sin(r);
         let c = Math.cos(r);
-        vertexPosition.push(s * 1.0, 1.0, c * 1.0);
-        vertexPosition.push(s * 1.0, 1.0, c * 1.0);
-        vertexColor.push(0.25, 1.0, 1.0, 1.0);
-        vertexColor.push(0.25, 1.0, 1.0, 1.0);
+        vertexPosition.push(s * 1.0, 1.25, c * 1.0);
+        vertexPosition.push(s * 1.0, 1.25, c * 1.0);
+        vertexColor.push(0.0, 0.75, 0.65, 1.0);
+        vertexColor.push(0.0, 0.75, 0.65, 1.0);
         if(i === SPLIT - 1){
           vertexIndex.push(0, i * 2 + 2, 2);
         } else {
@@ -136,10 +136,10 @@ let qty = qt4.identity(qt4.create());
         let r = RADIAN * j;
         let s = Math.sin(r);
         let c = Math.cos(r);
-        vertexPosition.push(s * 1.25, 0.65, c * 1.25);
-        vertexPosition.push(s * 1.25, 0.65, c * 1.25);
-        vertexColor.push(0.25, 1.0, 1.0, 1.0);
-        vertexColor.push(0.25, 1.0, 1.0, 1.0);
+        vertexPosition.push(s * 1.25, 0.9, c * 1.25);
+        vertexPosition.push(s * 1.25, 0.9, c * 1.25);
+        vertexColor.push(0.0, 0.75, 0.65, 1.0);
+        vertexColor.push(0.0, 0.75, 0.65, 1.0);
         if(j === 0){
           vertexIndex.push(1, SPLIT * 2 + j * 2 + 2, SPLIT * 2 * 2);
         } else {

@@ -1,4 +1,6 @@
 header.st-Header
+  a.st-Header_Logo(href!="<?php echo home_url(); ?>/")
+    img(src!="<?php echo get_template_directory_uri(); ?>/assets/images/common/logo.png" width="200" height="40")
   button#st-Header_Button.st-Header_Button
     | Menu
   nav#st-Header_Nav.st-Header_Nav.st-Header_Nav-Hidden

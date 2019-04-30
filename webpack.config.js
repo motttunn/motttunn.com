@@ -1,6 +1,6 @@
 module.exports = {
 
-  mode: 'development',
+  mode: 'production',
 
   entry: {
     'common': './src/assets/js/script.js',
@@ -32,6 +32,7 @@ module.exports = {
       }
     ]
   },
+  
   // module: {
   //   rules: [
   //     {

@@ -15,18 +15,18 @@
     <meta property="og:title" content="News | motttunn.com">
     <meta property="og:site_name" content="News | motttunn.com">
     <meta property="og:description" content="web制作に関する備忘録およびポートフォリオサイトです。">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="https://motttunn.com/wp/wp-content/themes/motttunn/assets/images/common/ogp.png">
     <meta property="og:locale" content="ja_JP">
     <meta property="fb:app_id" content="">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:image" content="https://motttunn.com/wp/wp-content/themes/motttunn/assets/images/common/ogp.png">
     <link rel="canonical" href="https://motttunn.com/news/">
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=7343090">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=8376289">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -72,8 +72,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=7343090"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=7343090"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=8376289"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=8376289"></script>
     <?php wp_footer(); ?>
   </body>
 </html>
