@@ -37,12 +37,12 @@ window.addEventListener('load', () => {
 const initialize = () => {
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x505050);
+  scene.background = new THREE.Color(0xeeeeee);
 
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 10);
 
   roomGeometry = new THREE.BoxLineGeometry(6, 6, 6, 10, 10, 10);
-  roomMaterial = new THREE.LineBasicMaterial({color:0x808080});
+  roomMaterial = new THREE.LineBasicMaterial({color:0x546e7a});
   room         = new THREE.LineSegments(roomGeometry, roomMaterial);
   room.geometry.translate(0, 3, 0);
   scene.add(room);
@@ -52,11 +52,11 @@ const initialize = () => {
   scene.add(light);
 
   sphereGroup = new THREE.Group();
-  sphereGroup.position.set(0, 0, 0);
+  sphereGroup.position.set(0, 0.35, 0);
   room.add(sphereGroup);
 
-  sphereGeometry = new THREE.IcosahedronBufferGeometry(0.08, 2);
-  sphereMaterial = new THREE.MeshNormalMaterial();
+  sphereGeometry = new THREE.IcosahedronBufferGeometry(0.075, 0);
+  sphereMaterial = new THREE.MeshLambertMaterial({color: 0x00bfa5});
   for(let i = 0; i < 20; i++){
     let sphereMesh   = new THREE.Mesh(sphereGeometry, sphereMaterial);
     let sphereRadian = i / 20 * Math.PI * 2;
@@ -78,10 +78,10 @@ const initialize = () => {
   }, false);
 
   window.addEventListener('deviceorientation', (e) => {
-    let gyroY = e.gamma.toFixed(2);
-    gyroY = gyroY / 90 + 0.01 * gyroY;
-    gyroY = gyroY * -1;
-    onWindowGyro(gyroY);
+    let gyroX = e.beta.toFixed(2);
+    gyroX = gyroX / 90 + 0.01 * gyroX;
+    gyroX = gyroX * -1.25;
+    onWindowGyro(gyroX);
   }, false);
 
 };
@@ -128,5 +128,10 @@ const animate = () => {
 const render = () => {
 
   renderer.render(scene, camera);
+
+  sphereGroup.children.forEach((mesh) => {
+    mesh.rotation.x -= 0.0125;
+    mesh.rotation.y -= 0.0125;
+  });
 
 };

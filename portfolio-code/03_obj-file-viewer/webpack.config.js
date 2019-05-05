@@ -1,6 +1,6 @@
 module.exports = {
 
-  mode: 'development',
+  mode: 'production',
 
   // entry: './src/assets/js/main.js',
   entry: './src/assets/ts/script.ts',

@@ -13,13 +13,9 @@ block config
 block css
   link(rel="stylesheet" href!=config.path + "assets/css/style.css?hash=" + config.hash)
 block js
-  | <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-  | <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+  script(src!=config.path + "assets/js/lib/THREE.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/WebVR.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/webvr-polyfill.js?hash=" + config.hash)
+  script(src!=config.path + "assets/js/lib/BoxLineGeometry.js?hash=" + config.hash)
   script(src!=config.path + "assets/js/bundle.js?hash=" + config.hash)
 block content
-  div.st-Container
-    a-scene(embedded arjs)
-      a-maker(preset="hiro")
-        a-sphere(scale=".25 .25 .25" position="0 .5 0" color="#232323")
-          a-animation(attribute="position" to="0 1 0" direction="alternate" dur="4000" repet="indefinite")
-      a-entry(camera)

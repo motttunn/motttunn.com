@@ -29,7 +29,7 @@ const commonConfig = {
 gulp.task('bs', () => {
   browserSync.init(null, {
     server: {
-      baseDir: '../../'
+      baseDir: './'
     },
     open: false
   });
