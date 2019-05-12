@@ -74,7 +74,7 @@ const parallaxThumbnail = () => {
         let worksThumbnailHeight     = worksThumbnail[i].clientHeight;
         let worksThumbnailDifference = scrollVolume - worksThumbnailTop - (worksThumbnailHeight * 1.5);
         if(worksThumbnailDifference > 0){
-          worksThumbnail[i].style.transform = 'translateY(calc(-50% - ' + worksThumbnailDifference / 25 + 'px))';
+          worksThumbnail[i].style.transform = 'translateY(calc(-50% - ' + worksThumbnailDifference / 32.5 + 'px))';
         };
       }
     }, false);
@@ -137,6 +137,20 @@ const scrollPage = () => {
 
 
 // ------------------------------------------------------------------------
+// tilePortfolio
+// ----- BOTH
+// ------------------------------------------------------------------------
+const tilePortfolio = () => {
+  $(window).on('load', function(){
+    if(windowWidthJ <= breakPoint){
+      $(".st-Works_List_Item_Description").tile();
+    };
+  });
+}
+
+
+
+// ------------------------------------------------------------------------
 // anchorLink
 // ----- BOTH
 // ------------------------------------------------------------------------
@@ -159,11 +173,28 @@ const anchorLink = () => {
 
 
 
+// ------------------------------------------------------------------------
+// easeScroll
+// ----- BOTH
+// ------------------------------------------------------------------------
+const setScroll = () => {
+  if(windowWidthJ > breakPoint){
+    $("html").easeScroll({
+      stepSize: 60,
+    });
+  }
+};
+
+
+
+
 export {
   openPage,
   toggleHeader,
   parallaxThumbnail,
   slickMain,
   scrollPage,
-  anchorLink
+  tilePortfolio,
+  anchorLink,
+  setScroll
 }

@@ -37,7 +37,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=2879533">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=5715891">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -57,7 +57,9 @@
                 <li class="Content_Link_List_Item Content_Link_List_Item-Github"><a class="Item_Button" href="<?php the_field('portfolio_url_github'); ?>" target="_blank">Github</a></li>
               </ul>
             </div>
-            <div class="Content_Text"><?php the_content(); ?>
+            <div class="Content_Text">
+              <?php the_content(); ?>
+              <?php if(get_field('portfolio_point_good')): ?>
               <h4>頑張ったポイント</h4>
               <ul class="Content_Text_List">
                 <?php
@@ -70,8 +72,11 @@
                   echo '<li class="Content_Text_List_Item"><p>・' . $good_item . '</p></li>';
                   endforeach;
                 ?>
-              </ul>
-              <h4>改善が必要なポイント</h4>
+              </ul><?php
+                endif;
+                if(get_field('portfolio_point_bad')):
+              ?>
+              <h4>改善したいポイント</h4>
               <ul class="Content_Text_List">
                 <?php
                   $bad_text  = get_field('portfolio_point_bad');
@@ -83,7 +88,7 @@
                   echo '<li class="Content_Text_List_Item"><p>・' . $bad_item . '</p></li>';
                   endforeach;
                 ?>
-              </ul>
+              </ul><?php endif; ?>
             </div>
             <div class="Content_PrevNext">
               <?php
@@ -98,8 +103,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=2879533"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=2879533"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=5715891"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=5715891"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

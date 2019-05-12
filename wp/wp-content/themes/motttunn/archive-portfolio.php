@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=8401612">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/portfolio/style.css?hash=4044896">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -36,18 +36,20 @@
       <section class="por-Archive">
         <div class="por-Archive_Box">
           <h2 class="sw-Title"><a href="<?php echo home_url(); ?>/portfolio/">Portfolio</a></h2>
-          <div class="st-Works st-Works-News">
+          <div class="st-Works st-Works-Portfolio">
             <ul class="st-Works_List">
               <?php
                 $work_count = 0;
                 $work_class = 'st-Works_List_Item-Left';
                 $work_paged = get_query_var('paged', 1);
-                $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 8);
+                $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 9);
                 $work_query = new WP_Query($work_args);
                 if($work_query->have_posts()):
                 while($work_query->have_posts()): $work_query->the_post();
                 if($work_count%2 !== 0):
                 $work_class = 'st-Works_List_Item-Right';
+                else:
+                $work_class = 'st-Works_List_Item-Left';
                 endif;
                 $work_count++;
               ?>
@@ -67,11 +69,12 @@
                       </h3>
                       <p class="Item_Description_Box_Text">
                         <?php
-                          if(mb_strlen(get_the_content(), 'UTF-8')>72){
-                              $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
-                              echo $work_content . '…';
+                          $work_content = strip_tags(get_the_content());
+                          if(mb_strlen($work_content, 'UTF-8')>80){
+                              $work_content_adjust = mb_substr($work_content, 0, 80, 'UTF-8');
+                              echo strip_tags($work_content_adjust) . '…';
                           } else {
-                              echo get_the_content();
+                              echo strip_tags(get_the_content());
                           }
                         ?>
                       </p>
@@ -85,14 +88,15 @@
           <div class="st-Pagenation st-Pagenation-Portfolio">
             <?php
               wp_pagenavi(array('query' => $work_query));
+              wp_reset_postdata();
             ?>
           </div>
         </div>
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=8401612"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=8401612"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=4044896"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/portfolio/app.bundle.js?hash=4044896"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

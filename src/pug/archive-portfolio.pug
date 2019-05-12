@@ -24,18 +24,20 @@ block content
         h2.sw-Title
           a(href!=config.pathHome + "portfolio/")
             | Portfolio
-        div.st-Works.st-Works-News
+        div.st-Works.st-Works-Portfolio
           ul.st-Works_List
             | <?php
             |   $work_count = 0;
             |   $work_class = 'st-Works_List_Item-Left';
             |   $work_paged = get_query_var('paged', 1);
-            |   $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 8);
+            |   $work_args  = array('paged' => $work_paged, 'post_type' => 'portfolio', 'posts_per_page' => 9);
             |   $work_query = new WP_Query($work_args);
             |   if($work_query->have_posts()):
             |   while($work_query->have_posts()): $work_query->the_post();
             |   if($work_count%2 !== 0):
             |   $work_class = 'st-Works_List_Item-Right';
+            |   else:
+            |   $work_class = 'st-Works_List_Item-Left';
             |   endif;
             |   $work_count++;
             | ?>
@@ -56,11 +58,12 @@ block content
                       | ?>
                     p.Item_Description_Box_Text
                       | <?php
-                      |   if(mb_strlen(get_the_content(), 'UTF-8')>72){
-                      |       $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
-                      |       echo $work_content . '…';
+                      |   $work_content = strip_tags(get_the_content());
+                      |   if(mb_strlen($work_content, 'UTF-8')>80){
+                      |       $work_content_adjust = mb_substr($work_content, 0, 80, 'UTF-8');
+                      |       echo strip_tags($work_content_adjust) . '…';
                       |   } else {
-                      |       echo get_the_content();
+                      |       echo strip_tags(get_the_content());
                       |   }
                       | ?>
             | <?php
@@ -70,6 +73,7 @@ block content
         div.st-Pagenation.st-Pagenation-Portfolio
           | <?php
           |   wp_pagenavi(array('query' => $work_query));
+          |   wp_reset_postdata();
           | ?>
     |
     | <?php get_footer(); ?>

@@ -37,7 +37,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=6225069">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/news/style.css?hash=2543230">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -65,8 +65,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=6225069"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=6225069"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/lib.min.js?hash=2543230"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/news/app.bundle.js?hash=2543230"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

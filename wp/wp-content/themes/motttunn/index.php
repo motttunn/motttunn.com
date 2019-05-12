@@ -26,8 +26,8 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/common/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/lib.min.css?hash=5567604">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=5567604">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/lib.min.css?hash=8303415">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/index/style.css?hash=8303415">
     <?php wp_head(); ?>
   </head>
   <body>
@@ -49,7 +49,13 @@
                 <figure class="Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                 <div class="Item_Info">
                   <p class="Item_Info_Description">
-                    <?php the_time('Y.m.d'); ?>
+                    <?php
+                      if($main_item_type == 'post'):
+                      the_time('Y.m.d.');
+                      elseif ($main_item_type == 'portfolio'):
+                      the_field('portfolio_date');
+                      endif;
+                    ?>
                      / 
                     <?php 
                       if($main_item_type == 'post'):
@@ -88,7 +94,7 @@
                 while($post_query->have_posts()): $post_query->the_post();
               ?>
               <li class="st-Posts_List_Item"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
-                  <p class="Item_Date"><?php the_time('Y.m.d'); ?></p>
+                  <p class="Item_Date"><?php the_time('Y.m.d.'); ?></p>
                   <figure class="Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
                   <h3 class="Item_Title">
                     <?php
@@ -115,18 +121,20 @@
               <?php
                 $work_count = 0;
                 $work_class = 'st-Works_List_Item-Left';
-                $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 4);
+                $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 3);
                 $work_query = new WP_Query($work_args);
                 if($work_query->have_posts()):
                 while($work_query->have_posts()): $work_query->the_post();
                 if($work_count%2 !== 0):
                 $work_class = 'st-Works_List_Item-Right';
+                else:
+                $work_class = 'st-Works_List_Item-Left';
                 endif;
                 $work_count++;
               ?>
               <li class="st-Works_List_Item <?php echo $work_class; ?>"><a class="Item-Anchor" href="<?php the_permalink(); ?>">
                   <figure class="st-Works_List_Item_Thumbnail Item_Thumbnail"><?php the_post_thumbnail(); ?></figure>
-                  <div class="Item_Description">
+                  <div class="st-Works_List_Item_Description Item_Description">
                     <div class="Item_Description_Box">
                       <h3 class="Item_Description_Box_Title">
                         <?php
@@ -140,11 +148,12 @@
                       </h3>
                       <p class="Item_Description_Box_Text">
                         <?php
-                          if(mb_strlen(get_the_content(), 'UTF-8')>72){
-                              $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
-                              echo $work_content . '…';
+                          $work_content = strip_tags(get_the_content());
+                          if(mb_strlen($work_content, 'UTF-8')>80){
+                              $work_content_adjust = mb_substr($work_content, 0, 80, 'UTF-8');
+                              echo strip_tags($work_content_adjust) . '…';
                           } else {
-                              echo get_the_content();
+                              echo strip_tags(get_the_content());
                           }
                         ?>
                       </p>
@@ -161,7 +170,7 @@
         <div class="idx-About_Box">
           <div class="idx-About_Box_Introduction">
             <h2 class="sw-Title"><span>Introduction</span></h2>
-            <p class="idx-About_Box_Introduction_Text">web制作に関する備忘録およびポートフォリオサイトです。<br class="pc_i">運営している人間は粉物とビールが大好きな20歳児。<br class="pc_i">趣味は読書とゲーム(splatoon2)。</p>
+            <p class="idx-About_Box_Introduction_Text">web制作に関する備忘録およびポートフォリオサイトです。<br class="pc_i">運営している人間は粉物とビールが大好きな20歳児。<br class="pc_i">趣味は読書(辻村深月さん)とゲーム(splatoon2)。</p>
             <p class="idx-About_Box_Introduction_Text">Web上での3D表現について興味があり、<br class="pc_i">現在勉強および転職活動中です。</p>
           </div>
           <div class="idx-About_Box_Links">
@@ -171,8 +180,8 @@
       </section>
       <?php get_footer(); ?>
     </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/lib.min.js?hash=5567604"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/app.bundle.js?hash=5567604"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/lib.min.js?hash=8303415"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/js/index/app.bundle.js?hash=8303415"></script>
     <?php wp_footer(); ?>
   </body>
 </html>

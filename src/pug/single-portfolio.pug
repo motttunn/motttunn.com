@@ -52,6 +52,7 @@ block content
                   | Github
           div.Content_Text
             | <?php the_content(); ?>
+            | <?php if(get_field('portfolio_point_good')): ?>
             h4
               | 頑張ったポイント
             ul.Content_Text_List
@@ -65,8 +66,12 @@ block content
               |   echo '<li class="Content_Text_List_Item"><p>・' . $good_item . '</p></li>';
               |   endforeach;
               | ?>
+            | <?php
+            |   endif;
+            |   if(get_field('portfolio_point_bad')):
+            | ?>
             h4
-              | 改善が必要なポイント
+              | 改善したいポイント
             ul.Content_Text_List
               | <?php
               |   $bad_text  = get_field('portfolio_point_bad');
@@ -78,6 +83,7 @@ block content
               |   echo '<li class="Content_Text_List_Item"><p>・' . $bad_item . '</p></li>';
               |   endforeach;
               | ?>
+            | <?php endif; ?>
           div.Content_PrevNext
             | <?php
             |   $item_current = get_the_permalink();

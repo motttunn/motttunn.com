@@ -18,12 +18,36 @@
     position: fixed;
     left: 0;
     @include mediaQuery(min, 1024, 0){
-      width: 200px;
+      padding: 0 0 0 22px;
       top: 32px;
     }
     @include mediaQuery(max, 0, 1023){
-      width: (328 / 768) * 100vw;
+      padding: 0 0 0 (46 / 768) * 100vw;
       top: (40 / 768) * 100vw;
+    }
+    &::before {
+      content: "";
+      display: block;
+      background-color: $color-blue;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include mediaQuery(min, 1024, 0){
+        width: 24px;
+        height: 39px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        width: (48 / 768) * 100vw;
+        height: (67 / 768) * 100vw;
+      }
+    }
+    img {
+      @include mediaQuery(min, 1024, 0){
+        width: 196px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        width: (336 / 768) * 100vw;
+      }
     }
   }
   &_Button {
@@ -405,6 +429,19 @@
     }
   }
   &-News {
+    .st-Works_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: 0 auto;
+
+      }
+    }
+    .st-Works_List_Item + .st-Works_List_Item {
+      @include mediaQuery(max, 0, 1023){
+        margin: (88 / 768) * 100vw auto 0;
+      }
+    }
+  }
+  &-Portfolio {
     .st-Works_List_Item {
       @include mediaQuery(max, 0, 1023){
         margin: 0 auto;
@@ -818,6 +855,13 @@
             margin: 3.6875vw 0 0 0;
           }
         }
+        a {
+          color: $color-gray;
+          text-decoration: underline;
+        }
+        strong {
+          font-weight: 700;
+        }
         &_List {
           @include mediaQuery(min, 1024, 0){
             margin: 16px 0 0 0;
@@ -826,10 +870,10 @@
             margin: 4.1875vw 0 0 0;
           }
           &_Item {
-            p {
-              padding-left: 1em;
-              text-indent: -1em;
-            }
+            // p {
+            //   padding-left: 1em;
+            //   text-indent: -1em;
+            // }
           }
         }
       }
@@ -906,8 +950,20 @@
   .wp-pagenavi {
     text-align: center;
     font-size: 0;
+    @include mediaQuery(min, 1024, 0){
+    }
+    @include mediaQuery(max, 0, 1023){
+    }
     .pages {
       display: none;
+    }
+    span + a, a + span, span + span, a + a {
+      @include mediaQuery(min, 1024, 0){
+        margin: 0 0 0 24px;
+      }
+      @include mediaQuery(max, 0, 1023){
+        margin: 0 0 0 (24 / 768) * 100vw;
+      }
     }
     span, a.page {
       display: inline-block;

@@ -36,7 +36,7 @@ block content
             li.st-Posts_List_Item
               a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 p.Item_Date
-                  | <?php the_time('Y.m.d'); ?>
+                  | <?php the_time('Y.m.d.'); ?>
                 figure.Item_Thumbnail
                   | <?php the_post_thumbnail(); ?>
                 h3.Item_Title

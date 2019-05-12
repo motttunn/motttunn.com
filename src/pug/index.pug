@@ -44,7 +44,13 @@ block content
                 | <?php the_post_thumbnail(); ?>
               div.Item_Info
                 p.Item_Info_Description
-                  | <?php the_time('Y.m.d'); ?>
+                  | <?php
+                  |   if($main_item_type == 'post'):
+                  |   the_time('Y.m.d.');
+                  |   elseif ($main_item_type == 'portfolio'):
+                  |   the_field('portfolio_date');
+                  |   endif;
+                  | ?>
                   |  / 
                   | <?php 
                   |   if($main_item_type == 'post'):
@@ -82,7 +88,7 @@ block content
             li.st-Posts_List_Item
               a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 p.Item_Date
-                  | <?php the_time('Y.m.d'); ?>
+                  | <?php the_time('Y.m.d.'); ?>
                 figure.Item_Thumbnail
                   | <?php the_post_thumbnail(); ?>
                 h3.Item_Title
@@ -108,12 +114,14 @@ block content
             | <?php
             |   $work_count = 0;
             |   $work_class = 'st-Works_List_Item-Left';
-            |   $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 4);
+            |   $work_args  = array('post_type' => 'portfolio', 'posts_per_page' => 3);
             |   $work_query = new WP_Query($work_args);
             |   if($work_query->have_posts()):
             |   while($work_query->have_posts()): $work_query->the_post();
             |   if($work_count%2 !== 0):
             |   $work_class = 'st-Works_List_Item-Right';
+            |   else:
+            |   $work_class = 'st-Works_List_Item-Left';
             |   endif;
             |   $work_count++;
             | ?>
@@ -121,7 +129,7 @@ block content
               a.Item-Anchor(href!="<?php the_permalink(); ?>")
                 figure.st-Works_List_Item_Thumbnail.Item_Thumbnail
                   | <?php the_post_thumbnail(); ?>
-                div.Item_Description
+                div.st-Works_List_Item_Description.Item_Description
                   div.Item_Description_Box
                     h3.Item_Description_Box_Title
                       | <?php
@@ -134,11 +142,12 @@ block content
                       | ?>
                     p.Item_Description_Box_Text
                       | <?php
-                      |   if(mb_strlen(get_the_content(), 'UTF-8')>72){
-                      |       $work_content = mb_substr(get_the_content(), 0, 72, 'UTF-8');
-                      |       echo $work_content . '…';
+                      |   $work_content = strip_tags(get_the_content());
+                      |   if(mb_strlen($work_content, 'UTF-8')>80){
+                      |       $work_content_adjust = mb_substr($work_content, 0, 80, 'UTF-8');
+                      |       echo strip_tags($work_content_adjust) . '…';
                       |   } else {
-                      |       echo get_the_content();
+                      |       echo strip_tags(get_the_content());
                       |   }
                       | ?>
             | <?php
@@ -156,7 +165,7 @@ block content
             br.pc_i
             | 運営している人間は粉物とビールが大好きな20歳児。
             br.pc_i
-            | 趣味は読書とゲーム(splatoon2)。
+            | 趣味は読書(辻村深月さん)とゲーム(splatoon2)。
           p.idx-About_Box_Introduction_Text
             | Web上での3D表現について興味があり、
             br.pc_i

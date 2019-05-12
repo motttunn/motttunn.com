@@ -27,21 +27,12 @@
     <link rel="apple-touch-icon" href="./assets/images/common/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/common/apple-touch-icon-180x180.png">
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/style.css?hash=4969419">
+    <link rel="stylesheet" href="./assets/css/style.css?hash=1209801">
   </head>
   <body>
-    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-    <script src="./assets/js/bundle.js?hash=4969419"></script>
-    <a-scene embedded arjs="debugUIEnabled:false; trackingMethod:best;" vr-mode-ui="enabled:false;">
-      <a-assets>
-        <a-asset-item id="modelObj" src="./assets/obj/Dolphin.obj"></a-asset-item>
-        <a-asset-item id="modelMtl" src="./assets/mtl/Dolphin.mtl"></a-asset-item>
-      </a-assets>
-      <a-marker preset="hiro">
-        <a-obj-model id="model" src="#modelObj" mtl="#modelMtl" position="0 0 0" scale="0.125 0.125 0.125" rotation="0 -90 60"></a-obj-model>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
+    <div class="st-Container"></div>
+    <script src="./assets/js/lib/THREE.js"></script>
+    <script src="./assets/js/lib/Reflector.js"></script>
+    <script src="./assets/js/bundle.js?hash=1209801"></script>
   </body>
 </html>
